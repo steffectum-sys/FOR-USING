@@ -32,49 +32,54 @@
         .header {
             background: linear-gradient(135deg, var(--primary-color) 0%, #0d47a1 100%);
             color: var(--white);
-            padding: 2rem 0;
+            padding: 1.5rem 1rem;
             box-shadow: var(--shadow);
-            top: 0;
-            z-index: 100;
+            position: relative;
         }
         
         .header h1 {
             text-align: center;
-            font-size: 2rem;
+            font-size: clamp(1.2rem, 5vw, 2rem);
             margin-bottom: 0.5rem;
+            padding: 0 1rem;
+            line-height: 1.3;
         }
         
         .header p {
             text-align: center;
             opacity: 0.9;
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            padding: 0 1rem;
         }
         
         .language-switcher {
-            position: absolute;
-            top: 1rem;
-            right: 2rem;
             display: flex;
             gap: 0.5rem;
             background: rgba(255, 255, 255, 0.2);
             padding: 0.5rem;
             border-radius: 25px;
             backdrop-filter: blur(10px);
+            justify-content: center;
+            margin: 0 auto 1rem;
+            max-width: 300px;
         }
         
         .language-switcher button {
             background: transparent;
             border: 2px solid var(--white);
             color: var(--white);
-            padding: 0.5rem 1.5rem;
+            padding: 0.5rem 1rem;
             border-radius: 20px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s;
-            font-size: 0.9rem;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            flex: 1;
+            white-space: nowrap;
         }
         
-        .language-switcher button:hover {
+        .language-switcher button:hover,
+        .language-switcher button:active {
             background: var(--white);
             color: var(--primary-color);
         }
@@ -86,20 +91,21 @@
         
         .nav {
             background: var(--white);
-            padding: 1rem 0;
+            padding: 0.5rem 0;
             box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 99;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
         
         .nav ul {
             list-style: none;
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            padding: 0 2rem;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            min-width: max-content;
         }
         
         .nav a {
@@ -109,38 +115,43 @@
             transition: all 0.3s;
             padding: 0.5rem 1rem;
             border-radius: 5px;
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
+            white-space: nowrap;
+            display: block;
         }
         
-        .nav a:hover {
+        .nav a:hover,
+        .nav a:active {
             background: var(--primary-color);
             color: var(--white);
         }
         
         .container {
             max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
+            margin: 1rem auto;
+            padding: 0 1rem;
         }
         
         .section {
             background: var(--white);
-            margin-bottom: 2rem;
-            padding: 2rem;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
             border-radius: 10px;
             box-shadow: var(--shadow);
         }
         
         .section-title {
             color: var(--primary-color);
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            margin-bottom: 1rem;
             padding-bottom: 0.5rem;
             border-bottom: 3px solid var(--primary-color);
+            word-wrap: break-word;
         }
         
         .subsection-title {
             color: var(--dark-color);
-            font-size: 1.4rem;
+            font-size: clamp(1.1rem, 3.5vw, 1.4rem);
             margin: 1.5rem 0 1rem 0;
             padding-left: 1rem;
             border-left: 4px solid var(--secondary-color);
@@ -149,7 +160,7 @@
         .parameter-box {
             background: #e3f2fd;
             border-left: 5px solid var(--primary-color);
-            padding: 1.5rem;
+            padding: 1rem;
             margin: 1rem 0;
             border-radius: 5px;
         }
@@ -157,6 +168,13 @@
         .parameter-box h3 {
             color: var(--primary-color);
             margin-bottom: 0.5rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            word-wrap: break-word;
+        }
+        
+        .parameter-box p,
+        .parameter-box li {
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
         }
         
         .info-box {
@@ -188,7 +206,7 @@
         
         .checklist {
             background: var(--light-bg);
-            padding: 1.5rem;
+            padding: 1rem;
             border-radius: 8px;
             margin: 1rem 0;
         }
@@ -196,14 +214,16 @@
         .checklist-item {
             padding: 0.5rem 0;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
         }
         
         .checklist-item::before {
             content: "☐";
-            font-size: 1.5rem;
-            margin-right: 1rem;
+            font-size: 1.3rem;
+            margin-right: 0.75rem;
             color: var(--primary-color);
+            flex-shrink: 0;
         }
         
         .positive-item::before {
@@ -217,57 +237,71 @@
         }
         
         ul {
-            margin-left: 2rem;
+            margin-left: 1.5rem;
             margin-top: 0.5rem;
         }
         
         li {
             margin: 0.5rem 0;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
         }
         
         .step-box {
             background: linear-gradient(to right, #e3f2fd, #ffffff);
             border: 2px solid var(--primary-color);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+            padding: 1rem;
+            margin: 1rem 0;
             border-radius: 8px;
         }
         
         .step-box h3 {
             color: var(--primary-color);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
+            font-size: clamp(1rem, 3vw, 1.2rem);
         }
         
         .example-box {
             background: #f1f3f4;
             border: 1px solid #dadce0;
-            padding: 1.5rem;
+            padding: 1rem;
             margin: 1rem 0;
             border-radius: 8px;
         }
         
+        .example-box h3,
         .example-box h4 {
             color: var(--secondary-color);
             margin-bottom: 0.5rem;
+            font-size: clamp(1rem, 3vw, 1.1rem);
+        }
+        
+        /* Responsive table */
+        .table-container {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin: 1rem 0;
         }
         
         table {
             width: 100%;
+            min-width: 500px;
             border-collapse: collapse;
-            margin: 1rem 0;
             box-shadow: var(--shadow);
         }
         
         th {
             background: var(--primary-color);
             color: var(--white);
-            padding: 1rem;
+            padding: 0.75rem;
             text-align: left;
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
+            white-space: nowrap;
         }
         
         td {
-            padding: 0.8rem;
+            padding: 0.75rem;
             border-bottom: 1px solid #e0e0e0;
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
         }
         
         tr:nth-child(even) {
@@ -277,21 +311,26 @@
         .footer {
             background: var(--dark-color);
             color: var(--white);
-            padding: 2rem;
+            padding: 1.5rem 1rem;
             text-align: center;
-            margin-top: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .footer p {
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
+            margin: 0.5rem 0;
         }
         
         .back-to-top {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: 1.5rem;
+            right: 1.5rem;
             background: var(--primary-color);
             color: var(--white);
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             cursor: pointer;
@@ -299,32 +338,13 @@
             transition: all 0.3s;
             text-decoration: none;
             font-size: 1.5rem;
+            z-index: 1000;
         }
         
-        .back-to-top:hover {
+        .back-to-top:hover,
+        .back-to-top:active {
             background: #0d47a1;
             transform: translateY(-5px);
-        }
-        
-        @media (max-width: 768px) {
-            .language-switcher {
-                position: static;
-                justify-content: center;
-                margin-bottom: 1rem;
-            }
-            
-            .nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .container {
-                padding: 0 1rem;
-            }
-            
-            .section {
-                padding: 1rem;
-            }
         }
         
         .highlight {
@@ -337,9 +357,10 @@
             display: inline-block;
             padding: 0.25rem 0.75rem;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: clamp(0.75rem, 2vw, 0.85rem);
             font-weight: 600;
             margin-left: 0.5rem;
+            white-space: nowrap;
         }
         
         .badge-success {
@@ -357,6 +378,15 @@
             color: var(--white);
         }
         
+        /* Image responsive */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        
         /* Language specific content visibility */
         .lang-content {
             display: none;
@@ -365,24 +395,142 @@
         .lang-content.active {
             display: block;
         }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem 0.5rem;
+            }
+            
+            .section {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .container {
+                padding: 0 0.5rem;
+                margin: 0.5rem auto;
+            }
+            
+            .parameter-box,
+            .info-box,
+            .warning-box,
+            .danger-box,
+            .step-box,
+            .example-box {
+                padding: 0.75rem;
+                margin: 0.75rem 0;
+            }
+            
+            ul {
+                margin-left: 1rem;
+            }
+            
+            .subsection-title {
+                padding-left: 0.75rem;
+                margin: 1rem 0 0.75rem 0;
+            }
+            
+            .back-to-top {
+                width: 40px;
+                height: 40px;
+                bottom: 1rem;
+                right: 1rem;
+                font-size: 1.3rem;
+            }
+            
+            .nav {
+                padding: 0.25rem 0;
+            }
+            
+            .nav ul {
+                padding: 0.25rem 0.5rem;
+                gap: 0.25rem;
+            }
+            
+            .nav a {
+                padding: 0.4rem 0.75rem;
+                font-size: 0.85rem;
+            }
+        }
+        
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .language-switcher {
+                margin: 0 0.5rem 1rem;
+            }
+            
+            .language-switcher button {
+                padding: 0.4rem 0.75rem;
+                font-size: 0.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+            
+            .subsection-title {
+                font-size: 1.05rem;
+            }
+            
+            .badge {
+                display: block;
+                margin: 0.25rem 0;
+                width: fit-content;
+            }
+            
+            table {
+                min-width: 400px;
+                font-size: 0.8rem;
+            }
+            
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+        
+        /* Landscape mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .header p {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            .header,
+            .nav,
+            .language-switcher,
+            .back-to-top {
+                display: none;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="language-switcher">
-            <button onclick="switchLanguage('ru')" id="btn-ru" class="active">🇷🇺 Русский</button>
-            <button onclick="switchLanguage('en')" id="btn-en">🇬🇧 English</button>
+            <button onclick="switchLanguage('ru')" id="btn-ru" class="active">🇷🇺 RU</button>
+            <button onclick="switchLanguage('en')" id="btn-en">🇬🇧 EN</button>
         </div>
         
         <!-- Russian Header -->
         <div class="lang-content active" data-lang="ru">
-            <br/><br/><h1>📊 ИНСТРУККЦИЯ ПРИМЕНЕНИЯ СИГНАЛОВ БОТА</h1>
+            <h1>📊 ИНСТРУКЦИЯ ПРИМЕНЕНИЯ СИГНАЛОВ БОТА</h1>
             <p>Подробное руководство для начинающих трейдеров</p>
         </div>
         
         <!-- English Header -->
         <div class="lang-content" data-lang="en">
-            <br/><br/><h1>📊 INSTRUCTIONS FOR USING BOT SIGNALS</h1>
+            <h1>📊 BOT SIGNALS USAGE GUIDE</h1>
             <p>Comprehensive Manual for Beginner Traders</p>
         </div>
     </div>
@@ -397,8 +545,8 @@
             </section>
             
             <section id="parameters" class="section">
-                <h2 class="section-title">📱 ЧТО ОЗНАЧАЕТ КАЖДЫЙ ПАРАМЕТР НА СКРИНШОТЕ</h2>
-                <img src="111.png" alt="1"><p><em>(January 27, 2026, 1:48 UTC)</em></p>
+                <h2 class="section-title">📱 ЧТО ОЗНАЧАЕТ КАЖДЫЙ ПАРАМЕТР</h2>
+                <img src="111.png" alt="Пример сигнала"><p><em>(January 27, 2026, 1:48 UTC)</em></p>
                 
                 <div class="parameter-box">
                     <h3>1. 1000PEPE SHORT 🔴</h3>
@@ -541,7 +689,7 @@
             </section>
             
             <section id="checklist" class="section">
-                <h2 class="section-title">✅ ЧЕК-ЛИСТ ПЕРЕД КАЖДОЙ СДЕЛКОЙ</h2>
+                <h2 class="section-title">✅ ЧЕК-ЛИСТ ПЕРЕД СДЕЛКОЙ</h2>
                 
                 <div class="checklist">
                     <div class="checklist-item">Liquidations > 500K USDT?</div>
@@ -567,48 +715,50 @@
                 <div class="example-box">
                     <h3 style="color: var(--secondary-color);">✅ Пример 1: Сильный SHORT сигнал</h3>
                     
-                    <table>
-                        <tr>
-                            <th>Параметр</th>
-                            <th>Значение</th>
-                            <th>Оценка</th>
-                        </tr>
-                        <tr>
-                            <td>Сигнал</td>
-                            <td>1000PEPE SHORT</td>
-                            <td><span class="badge badge-success">✅</span></td>
-                        </tr>
-                        <tr>
-                            <td>Liquidations</td>
-                            <td>962K USDT</td>
-                            <td><span class="badge badge-success">✅ Сильный</span></td>
-                        </tr>
-                        <tr>
-                            <td>Price</td>
-                            <td>0.0051836</td>
-                            <td>Цена входа</td>
-                        </tr>
-                        <tr>
-                            <td>DayVol</td>
-                            <td>313.9M</td>
-                            <td><span class="badge badge-success">✅ Высокий</span></td>
-                        </tr>
-                        <tr>
-                            <td>NATR</td>
-                            <td>0.84%</td>
-                            <td><span class="badge badge-success">✅ Оптимально</span></td>
-                        </tr>
-                        <tr>
-                            <td>Corr BTC</td>
-                            <td>0.84</td>
-                            <td><span class="badge badge-warning">⚠️ Проверить BTC</span></td>
-                        </tr>
-                        <tr>
-                            <td>FR</td>
-                            <td>0.0099%</td>
-                            <td><span class="badge badge-success">✅ Идеально</span></td>
-                        </tr>
-                    </table>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Параметр</th>
+                                <th>Значение</th>
+                                <th>Оценка</th>
+                            </tr>
+                            <tr>
+                                <td>Сигнал</td>
+                                <td>1000PEPE SHORT</td>
+                                <td><span class="badge badge-success">✅</span></td>
+                            </tr>
+                            <tr>
+                                <td>Liquidations</td>
+                                <td>962K USDT</td>
+                                <td><span class="badge badge-success">✅ Сильный</span></td>
+                            </tr>
+                            <tr>
+                                <td>Price</td>
+                                <td>0.0051836</td>
+                                <td>Цена входа</td>
+                            </tr>
+                            <tr>
+                                <td>DayVol</td>
+                                <td>313.9M</td>
+                                <td><span class="badge badge-success">✅ Высокий</span></td>
+                            </tr>
+                            <tr>
+                                <td>NATR</td>
+                                <td>0.84%</td>
+                                <td><span class="badge badge-success">✅ Оптимально</span></td>
+                            </tr>
+                            <tr>
+                                <td>Corr BTC</td>
+                                <td>0.84</td>
+                                <td><span class="badge badge-warning">⚠️ Проверить BTC</span></td>
+                            </tr>
+                            <tr>
+                                <td>FR</td>
+                                <td>0.0099%</td>
+                                <td><span class="badge badge-success">✅ Идеально</span></td>
+                            </tr>
+                        </table>
+                    </div>
                     
                     <div class="info-box">
                         <strong>Результат:</strong> Вход в SHORT, TP1 +5%, TP2 +10%. Общая прибыль: +7.5% к депозиту
@@ -625,8 +775,8 @@
             </section>
             
             <section id="parameters" class="section">
-                <h2 class="section-title">📱 WHAT EACH PARAMETER ON THE SCREENSHOT MEANS</h2>
-                <img src="111.png" alt="1"><p><em>(January 27, 2026, 1:48 UTC)</em></p>
+                <h2 class="section-title">📱 PARAMETER MEANINGS</h2>
+                <img src="111.png" alt="Signal Example"><p><em>(January 27, 2026, 1:48 UTC)</em></p>
                 
                 <div class="parameter-box">
                     <h3>1. 1000PEPE SHORT 🔴</h3>
@@ -769,7 +919,7 @@
             </section>
             
             <section id="checklist" class="section">
-                <h2 class="section-title">✅ CHECKLIST BEFORE EACH TRADE</h2>
+                <h2 class="section-title">✅ CHECKLIST BEFORE TRADE</h2>
                 
                 <div class="checklist">
                     <div class="checklist-item">Liquidations > 500K USDT?</div>
@@ -795,48 +945,50 @@
                 <div class="example-box">
                     <h3 style="color: var(--secondary-color);">✅ Example 1: Strong SHORT Signal</h3>
                     
-                    <table>
-                        <tr>
-                            <th>Parameter</th>
-                            <th>Value</th>
-                            <th>Assessment</th>
-                        </tr>
-                        <tr>
-                            <td>Signal</td>
-                            <td>1000PEPE SHORT</td>
-                            <td><span class="badge badge-success">✅</span></td>
-                        </tr>
-                        <tr>
-                            <td>Liquidations</td>
-                            <td>962K USDT</td>
-                            <td><span class="badge badge-success">✅ Strong</span></td>
-                        </tr>
-                        <tr>
-                            <td>Price</td>
-                            <td>0.0051836</td>
-                            <td>Entry Price</td>
-                        </tr>
-                        <tr>
-                            <td>DayVol</td>
-                            <td>313.9M</td>
-                            <td><span class="badge badge-success">✅ High</span></td>
-                        </tr>
-                        <tr>
-                            <td>NATR</td>
-                            <td>0.84%</td>
-                            <td><span class="badge badge-success">✅ Optimal</span></td>
-                        </tr>
-                        <tr>
-                            <td>Corr BTC</td>
-                            <td>0.84</td>
-                            <td><span class="badge badge-warning">⚠️ Check BTC</span></td>
-                        </tr>
-                        <tr>
-                            <td>FR</td>
-                            <td>0.0099%</td>
-                            <td><span class="badge badge-success">✅ Perfect</span></td>
-                        </tr>
-                    </table>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Value</th>
+                                <th>Assessment</th>
+                            </tr>
+                            <tr>
+                                <td>Signal</td>
+                                <td>1000PEPE SHORT</td>
+                                <td><span class="badge badge-success">✅</span></td>
+                            </tr>
+                            <tr>
+                                <td>Liquidations</td>
+                                <td>962K USDT</td>
+                                <td><span class="badge badge-success">✅ Strong</span></td>
+                            </tr>
+                            <tr>
+                                <td>Price</td>
+                                <td>0.0051836</td>
+                                <td>Entry Price</td>
+                            </tr>
+                            <tr>
+                                <td>DayVol</td>
+                                <td>313.9M</td>
+                                <td><span class="badge badge-success">✅ High</span></td>
+                            </tr>
+                            <tr>
+                                <td>NATR</td>
+                                <td>0.84%</td>
+                                <td><span class="badge badge-success">✅ Optimal</span></td>
+                            </tr>
+                            <tr>
+                                <td>Corr BTC</td>
+                                <td>0.84</td>
+                                <td><span class="badge badge-warning">⚠️ Check BTC</span></td>
+                            </tr>
+                            <tr>
+                                <td>FR</td>
+                                <td>0.0099%</td>
+                                <td><span class="badge badge-success">✅ Perfect</span></td>
+                            </tr>
+                        </table>
+                    </div>
                     
                     <div class="info-box">
                         <strong>Result:</strong> Entered SHORT, TP1 +5%, TP2 +10%. Total profit: +7.5% to deposit
