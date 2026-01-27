@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Guide | Инструкция по торговле</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #34a853;
+            --warning-color: #fbbc04;
+            --danger-color: #ea4335;
+            --dark-color: #202124;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background: var(--light-bg);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0d47a1 100%);
+            color: var(--white);
+            padding: 2rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            text-align: center;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .language-switcher button {
+            background: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .language-switcher button:hover {
+            background: var(--white);
+            color: var(--primary-color);
+        }
+        
+        .language-switcher button.active {
+            background: var(--white);
+            color: var(--primary-color);
+        }
+        
+        .nav {
+            background: var(--white);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 99;
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            padding: 0 2rem;
+        }
+        
+        .nav a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+        
+        .nav a:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section {
+            background: var(--white);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .subsection-title {
+            color: var(--dark-color);
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+            padding-left: 1rem;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .parameter-box {
+            background: #e3f2fd;
+            border-left: 5px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+        
+        .parameter-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-box {
+            background: #e8f5e9;
+            border-left: 5px solid var(--secondary-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 5px solid var(--warning-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .danger-box {
+            background: #f8d7da;
+            border-left: 5px solid var(--danger-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            font-weight: 600;
+            color: #721c24;
+        }
+        
+        .checklist {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+        
+        .checklist-item {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .checklist-item::before {
+            content: "☐";
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .positive-item::before {
+            content: "✓";
+            color: var(--secondary-color);
+        }
+        
+        .negative-item::before {
+            content: "✗";
+            color: var(--danger-color);
+        }
+        
+        ul {
+            margin-left: 2rem;
+            margin-top: 0.5rem;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+        }
+        
+        .step-box {
+            background: linear-gradient(to right, #e3f2fd, #ffffff);
+            border: 2px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+        
+        .step-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .example-box {
+            background: #f1f3f4;
+            border: 1px solid #dadce0;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+        
+        .example-box h4 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        th {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 1rem;
+            text-align: left;
+        }
+        
+        td {
+            padding: 0.8rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:nth-child(even) {
+            background: var(--light-bg);
+        }
+        
+        .footer {
+            background: var(--dark-color);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-color);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            text-decoration: none;
+            font-size: 1.5rem;
+        }
+        
+        .back-to-top:hover {
+            background: #0d47a1;
+            transform: translateY(-5px);
+        }
+        
+        @media (max-width: 768px) {
+            .language-switcher {
+                position: static;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+            
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .section {
+                padding: 1rem;
+            }
+        }
+        
+        .highlight {
+            background: #ffeb3b;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+        
+        .badge-success {
+            background: var(--secondary-color);
+            color: var(--white);
+        }
+        
+        .badge-warning {
+            background: var(--warning-color);
+            color: var(--dark-color);
+        }
+        
+        .badge-danger {
+            background: var(--danger-color);
+            color: var(--white);
+        }
+        
+        /* Language specific content visibility */
+        .lang-content {
+            display: none;
+        }
+        
+        .lang-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="language-switcher">
+            <button onclick="switchLanguage('ru')" id="btn-ru" class="active">🇷🇺 Русский</button>
+            <button onclick="switchLanguage('en')" id="btn-en">🇬🇧 English</button>
+        </div>
+        
+        <!-- Russian Header -->
+        <div class="lang-content active" data-lang="ru">
+            <br/><br/><h1>📊 ИНСТРУККЦИЯ ПРИМЕНЕНИЯ СИГНАЛОВ БОТА</h1>
+            <p>Подробное руководство для начинающих трейдеров</p>
+        </div>
+        
+        <!-- English Header -->
+        <div class="lang-content" data-lang="en">
+            <br/><br/><h1>📊 INSTRUCTIONS FOR USING BOT SIGNALS</h1>
+            <p>Comprehensive Manual for Beginner Traders</p>
+        </div>
+    </div>
+    
+    
+    <div class="container">
+        <!-- RUSSIAN CONTENT -->
+        <div class="lang-content active" data-lang="ru">
+            <section id="intro" class="section">
+                <h2 class="section-title">🎯 Введение</h2>
+                <p>Эта инструкция научит вас торговать на фьючерсах криптовалют, используя данные о ликвидациях. Система подходит для новичков и основана на простых, понятных сигналах.</p>
+            </section>
+            
+            <section id="parameters" class="section">
+                <h2 class="section-title">📱 ЧТО ОЗНАЧАЕТ КАЖДЫЙ ПАРАМЕТР НА СКРИНШОТЕ</h2>
+                <img src="111.png" alt="1"><p><em>(January 27, 2026, 1:48 UTC)</em></p>
+                
+                <div class="parameter-box">
+                    <h3>1. 1000PEPE SHORT 🔴</h3>
+                    <p><strong>Что это:</strong> Тип сигнала - открытие короткой позиции (ставка на падение цены)</p>
+                    <p><strong>Как использовать:</strong></p>
+                    <ul>
+                        <li><strong>SHORT</strong> = продаем (открываем короткую позицию)</li>
+                        <li><strong>LONG</strong> = покупаем (открываем длинную позицию)</li>
+                        <li>Если видите "SHORT", значит бот ожидает падение цены</li>
+                        <li>Если видите "LONG", значит бот ожидает рост цены</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>Действие:</strong> Когда появляется этот сигнал, открывайте позицию в указанном направлении на бирже
+                    </div>
+                </div>
+                
+                <div class="parameter-box">
+                    <h3>2. ⚡ Liquidations: 962K USDT</h3>
+                    <p><strong>Что это:</strong> Объем ликвидаций в долларах США (USDT)</p>
+                    <p><strong>Как интерпретировать:</strong></p>
+                    <ul>
+                        <li>Менее 100K USDT = слабый сигнал, можно пропустить</li>
+                        <li>100K - 500K USDT = средний сигнал, торговать с осторожностью</li>
+                        <li>500K - 1M USDT = сильный сигнал <span class="badge badge-success">✅</span> (как на примере)</li>
+                        <li>Более 1M USDT = очень сильный сигнал, высокий потенциал движения</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>Правило:</strong> Чем больше сумма ликвидаций, тем сильнее ожидаемое движение цены. На скриншоте 962K USDT - это сильный сигнал!
+                    </div>
+                </div>
+                
+                <div class="parameter-box">
+                    <h3>3. 💰 Price: 0.0051836</h3>
+                    <p><strong>Что это:</strong> Текущая цена актива в момент сигнала</p>
+                    <p><strong>Как использовать:</strong></p>
+                    <ul>
+                        <li>Это цена входа в позицию</li>
+                        <li>Запишите эту цену перед входом</li>
+                        <li>Используйте для расчета стоп-лосса и тейк-профита</li>
+                    </ul>
+                    <div class="example-box">
+                        <h4>Пример:</h4>
+                        <p>Если сигнал SHORT при цене 0.0051836, открывайте короткую позицию максимально близко к этой цене</p>
+                    </div>
+                </div>
+                
+                <div class="parameter-box">
+                    <h3>4. 📊 DayVol: 313.9M</h3>
+                    <p><strong>Что это:</strong> Дневной объем торгов в миллионах долларов</p>
+                    <p><strong>Как интерпретировать:</strong></p>
+                    <ul>
+                        <li>Менее 50M = низкая ликвидность, избегайте</li>
+                        <li>50M - 200M = средняя ликвидность, приемлемо</li>
+                        <li>Более 200M = высокая ликвидность <span class="badge badge-success">✅</span> (как на примере - 313.9M)</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>Правило:</strong> Торгуйте только активы с дневным объемом более 100M. Высокий объем = меньше проскальзываний, легче войти и выйти из позиции.
+                    </div>
+                </div>
+                
+                <div class="parameter-box">
+                    <h3>5. 📈 NATR: 0.84%</h3>
+                    <p><strong>Что это:</strong> Normalized Average True Range - нормализованная средняя волатильность</p>
+                    <p><strong>Как интерпретировать:</strong></p>
+                    <ul>
+                        <li>Менее 0.5% = низкая волатильность, маленький потенциал прибыли</li>
+                        <li>0.5% - 1.5% = оптимальная волатильность <span class="badge badge-success">✅</span> (как на примере - 0.84%)</li>
+                        <li>Более 1.5% = высокая волатильность, высокий риск</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>Правило:</strong> Лучшие сделки при NATR от 0.6% до 1.2%. Это означает, что актив движется достаточно для прибыли, но не слишком рискованно.
+                    </div>
+                </div>
+                
+                <div class="parameter-box">
+                    <h3>6. 🔗 Corr BTC: 0.84</h3>
+                    <p><strong>Что это:</strong> Корреляция с биткоином (от -1 до +1)</p>
+                    <p><strong>Как интерпретировать:</strong></p>
+                    <ul>
+                        <li>0.7 - 1.0 = сильная положительная корреляция (движется вместе с BTC) <span class="badge badge-success">✅</span></li>
+                        <li>0.3 - 0.7 = средняя корреляция</li>
+                        <li>-1.0 - 0.3 = слабая или отрицательная корреляция</li>
+                    </ul>
+                    <div class="warning-box">
+                        <strong>⚠️ Правило:</strong> Перед входом в сделку откройте график BTC и убедитесь, что он поддерживает ваш сигнал.
+                    </div>
+                </div>
+                
+                <div class="parameter-box">
+                    <h3>7. 💸 FR: 0.0099%</h3>
+                    <p><strong>Что это:</strong> Funding Rate - ставка финансирования на фьючерсах</p>
+                    <p><strong>Как интерпретировать:</strong></p>
+                    <ul>
+                        <li>Положительная (как 0.0099%) = больше лонгов, лонгеры платят шортистам</li>
+                        <li>Отрицательная = больше шортов, шортисты платят лонгерам</li>
+                        <li>Более ±0.01% = рынок перегрет в одну сторону</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>Правило:</strong> Лучшие SHORT сделки при FR > +0.008%, лучшие LONG сделки при FR < -0.008%
+                    </div>
+                </div>
+            </section>
+            
+            <section id="risk" class="section">
+                <h2 class="section-title">⚠️ УПРАВЛЕНИЕ РИСКАМИ</h2>
+                
+                <div class="danger-box">
+                    <h3>🚨 Золотые правила риск-менеджмента:</h3>
+                </div>
+                
+                <div class="step-box">
+                    <h3>1. Размер позиции</h3>
+                    <p>Никогда не рискуйте больше <span class="highlight">1-2% депозита</span> на одну сделку</p>
+                    <div class="example-box">
+                        <strong>Пример:</strong> Депозит 1000 USDT → максимальный риск 10-20 USDT
+                    </div>
+                </div>
+                
+                <div class="step-box">
+                    <h3>2. Плечо (Leverage)</h3>
+                    <ul>
+                        <li>Новички: <span class="badge badge-success">3x-5x</span> максимум</li>
+                        <li>Опытные: <span class="badge badge-warning">10x-15x</span></li>
+                        <li><span class="badge badge-danger">НИКОГДА</span> не используйте 50x-100x!</li>
+                    </ul>
+                </div>
+                
+                <div class="step-box">
+                    <h3>3. Соотношение риск/прибыль</h3>
+                    <p>Минимум <strong>1:2</strong></p>
+                    <ul>
+                        <li>Рискуете 2% → цельтесь на 4% прибыли</li>
+                        <li>Рискуете 10 USDT → цельтесь на 20 USDT прибыли</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <strong>⚠️ ВСЕГДА используйте стоп-лосс!</strong> Без исключений!
+                </div>
+            </section>
+            
+            <section id="checklist" class="section">
+                <h2 class="section-title">✅ ЧЕК-ЛИСТ ПЕРЕД КАЖДОЙ СДЕЛКОЙ</h2>
+                
+                <div class="checklist">
+                    <div class="checklist-item">Liquidations > 500K USDT?</div>
+                    <div class="checklist-item">DayVol > 100M?</div>
+                    <div class="checklist-item">NATR между 0.5% и 1.5%?</div>
+                    <div class="checklist-item">FR поддерживает направление?</div>
+                    <div class="checklist-item">График проверен (нет конфликтов)?</div>
+                    <div class="checklist-item">BTC проверен (если Corr BTC > 0.7)?</div>
+                    <div class="checklist-item">Размер позиции = 1-2% риска?</div>
+                    <div class="checklist-item">Плечо не более 10x?</div>
+                    <div class="checklist-item">Стоп-лосс установлен?</div>
+                    <div class="checklist-item">Тейк-профиты установлены?</div>
+                </div>
+                
+                <div class="danger-box">
+                    <strong>⚠️ Если хотя бы один пункт НЕ выполнен → пропускайте сделку!</strong>
+                </div>
+            </section>
+            
+            <section id="examples" class="section">
+                <h2 class="section-title">📊 ПРИМЕРЫ РЕАЛЬНЫХ СДЕЛОК</h2>
+                
+                <div class="example-box">
+                    <h3 style="color: var(--secondary-color);">✅ Пример 1: Сильный SHORT сигнал</h3>
+                    
+                    <table>
+                        <tr>
+                            <th>Параметр</th>
+                            <th>Значение</th>
+                            <th>Оценка</th>
+                        </tr>
+                        <tr>
+                            <td>Сигнал</td>
+                            <td>1000PEPE SHORT</td>
+                            <td><span class="badge badge-success">✅</span></td>
+                        </tr>
+                        <tr>
+                            <td>Liquidations</td>
+                            <td>962K USDT</td>
+                            <td><span class="badge badge-success">✅ Сильный</span></td>
+                        </tr>
+                        <tr>
+                            <td>Price</td>
+                            <td>0.0051836</td>
+                            <td>Цена входа</td>
+                        </tr>
+                        <tr>
+                            <td>DayVol</td>
+                            <td>313.9M</td>
+                            <td><span class="badge badge-success">✅ Высокий</span></td>
+                        </tr>
+                        <tr>
+                            <td>NATR</td>
+                            <td>0.84%</td>
+                            <td><span class="badge badge-success">✅ Оптимально</span></td>
+                        </tr>
+                        <tr>
+                            <td>Corr BTC</td>
+                            <td>0.84</td>
+                            <td><span class="badge badge-warning">⚠️ Проверить BTC</span></td>
+                        </tr>
+                        <tr>
+                            <td>FR</td>
+                            <td>0.0099%</td>
+                            <td><span class="badge badge-success">✅ Идеально</span></td>
+                        </tr>
+                    </table>
+                    
+                    <div class="info-box">
+                        <strong>Результат:</strong> Вход в SHORT, TP1 +5%, TP2 +10%. Общая прибыль: +7.5% к депозиту
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- ENGLISH CONTENT -->
+        <div class="lang-content" data-lang="en">
+            <section id="intro" class="section">
+                <h2 class="section-title">🎯 Introduction</h2>
+                <p>This guide will teach you how to trade cryptocurrency futures using liquidation data. The system is suitable for beginners and based on simple, clear signals.</p>
+            </section>
+            
+            <section id="parameters" class="section">
+                <h2 class="section-title">📱 WHAT EACH PARAMETER ON THE SCREENSHOT MEANS</h2>
+                <img src="111.png" alt="1"><p><em>(January 27, 2026, 1:48 UTC)</em></p>
+                
+                <div class="parameter-box">
+                    <h3>1. 1000PEPE SHORT 🔴</h3>
+                    <p><strong>What it is:</strong> Signal type - opening a short position (betting on price decline)</p>
+                    <p><strong>How to use:</strong></p>
+                    <ul>
+                        <li><strong>SHORT</strong> = sell (open a short position)</li>
+                        <li><strong>LONG</strong> = buy (open a long position)</li>
+                        <li>If you see "SHORT", the bot expects the price to fall</li>
+                        <li>If you see "LONG", the bot expects the price to rise</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>Action:</strong> When this signal appears, open a position in the indicated direction on the exchange
+                    </div>
+                </div>
+                
+                <div class="parameter-box">
+                    <h3>2. ⚡ Liquidations: 962K USDT</h3>
+                    <p><strong>What it is:</strong> Volume of liquidations in US dollars (USDT)</p>
+                    <p><strong>How to interpret:</strong></p>
+                    <ul>
+                        <li>Less than 100K USDT = weak signal, can skip</li>
+                        <li>100K - 500K USDT = medium signal, trade with caution</li>
+                        <li>500K - 1M USDT = strong signal <span class="badge badge-success">✅</span> (as in example)</li>
+                        <li>More than 1M USDT = very strong signal, high movement potential</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>Rule:</strong> The larger the liquidation amount, the stronger the expected price movement. In the screenshot, 962K USDT is a strong signal!
+                    </div>
+                </div>
+                
+                <div class="parameter-box">
+                    <h3>3. 💰 Price: 0.0051836</h3>
+                    <p><strong>What it is:</strong> Current asset price at the moment of the signal</p>
+                    <p><strong>How to use:</strong></p>
+                    <ul>
+                        <li>This is the entry price for the position</li>
+                        <li>Write down this price before entry</li>
+                        <li>Use it to calculate stop-loss and take-profit</li>
+                    </ul>
+                    <div class="example-box">
+                        <h4>Example:</h4>
+                        <p>If the signal is SHORT at price 0.0051836, open a short position as close to this price as possible</p>
+                    </div>
+                </div>
+                
+                <div class="parameter-box">
+                    <h3>4. 📊 DayVol: 313.9M</h3>
+                    <p><strong>What it is:</strong> Daily trading volume in millions of dollars</p>
+                    <p><strong>How to interpret:</strong></p>
+                    <ul>
+                        <li>Less than 50M = low liquidity, avoid</li>
+                        <li>50M - 200M = medium liquidity, acceptable</li>
+                        <li>More than 200M = high liquidity <span class="badge badge-success">✅</span> (as in example - 313.9M)</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>Rule:</strong> Trade only assets with daily volume above 100M. High volume = less slippage, easier to enter and exit positions.
+                    </div>
+                </div>
+                
+                <div class="parameter-box">
+                    <h3>5. 📈 NATR: 0.84%</h3>
+                    <p><strong>What it is:</strong> Normalized Average True Range - normalized average volatility</p>
+                    <p><strong>How to interpret:</strong></p>
+                    <ul>
+                        <li>Less than 0.5% = low volatility, small profit potential</li>
+                        <li>0.5% - 1.5% = optimal volatility <span class="badge badge-success">✅</span> (as in example - 0.84%)</li>
+                        <li>More than 1.5% = high volatility, high risk</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>Rule:</strong> Best trades at NATR from 0.6% to 1.2%. This means the asset moves enough for profit, but not too risky.
+                    </div>
+                </div>
+                
+                <div class="parameter-box">
+                    <h3>6. 🔗 Corr BTC: 0.84</h3>
+                    <p><strong>What it is:</strong> Correlation with Bitcoin (from -1 to +1)</p>
+                    <p><strong>How to interpret:</strong></p>
+                    <ul>
+                        <li>0.7 - 1.0 = strong positive correlation (moves together with BTC) <span class="badge badge-success">✅</span></li>
+                        <li>0.3 - 0.7 = medium correlation</li>
+                        <li>-1.0 - 0.3 = weak or negative correlation</li>
+                    </ul>
+                    <div class="warning-box">
+                        <strong>⚠️ Rule:</strong> Before entering a trade, open the BTC chart and make sure it supports your signal.
+                    </div>
+                </div>
+                
+                <div class="parameter-box">
+                    <h3>7. 💸 FR: 0.0099%</h3>
+                    <p><strong>What it is:</strong> Funding Rate - funding rate on futures</p>
+                    <p><strong>How to interpret:</strong></p>
+                    <ul>
+                        <li>Positive (like 0.0099%) = more longs, longs pay shorts</li>
+                        <li>Negative = more shorts, shorts pay longs</li>
+                        <li>More than ±0.01% = market overheated in one direction</li>
+                    </ul>
+                    <div class="info-box">
+                        <strong>Rule:</strong> Best SHORT trades at FR > +0.008%, best LONG trades at FR < -0.008%
+                    </div>
+                </div>
+            </section>
+            
+            <section id="risk" class="section">
+                <h2 class="section-title">⚠️ RISK MANAGEMENT</h2>
+                
+                <div class="danger-box">
+                    <h3>🚨 Golden Rules of Risk Management:</h3>
+                </div>
+                
+                <div class="step-box">
+                    <h3>1. Position Size</h3>
+                    <p>Never risk more than <span class="highlight">1-2% of deposit</span> per trade</p>
+                    <div class="example-box">
+                        <strong>Example:</strong> Deposit 1000 USDT → maximum risk 10-20 USDT
+                    </div>
+                </div>
+                
+                <div class="step-box">
+                    <h3>2. Leverage</h3>
+                    <ul>
+                        <li>Beginners: <span class="badge badge-success">3x-5x</span> maximum</li>
+                        <li>Experienced: <span class="badge badge-warning">10x-15x</span></li>
+                        <li><span class="badge badge-danger">NEVER</span> use 50x-100x!</li>
+                    </ul>
+                </div>
+                
+                <div class="step-box">
+                    <h3>3. Risk/Reward Ratio</h3>
+                    <p>Minimum <strong>1:2</strong></p>
+                    <ul>
+                        <li>Risk 2% → aim for 4% profit</li>
+                        <li>Risk 10 USDT → aim for 20 USDT profit</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-box">
+                    <strong>⚠️ ALWAYS use stop-loss!</strong> No exceptions!
+                </div>
+            </section>
+            
+            <section id="checklist" class="section">
+                <h2 class="section-title">✅ CHECKLIST BEFORE EACH TRADE</h2>
+                
+                <div class="checklist">
+                    <div class="checklist-item">Liquidations > 500K USDT?</div>
+                    <div class="checklist-item">DayVol > 100M?</div>
+                    <div class="checklist-item">NATR between 0.5% and 1.5%?</div>
+                    <div class="checklist-item">FR supports direction?</div>
+                    <div class="checklist-item">Chart checked (no conflicts)?</div>
+                    <div class="checklist-item">BTC checked (if Corr BTC > 0.7)?</div>
+                    <div class="checklist-item">Position size = 1-2% risk?</div>
+                    <div class="checklist-item">Leverage no more than 10x?</div>
+                    <div class="checklist-item">Stop-loss set?</div>
+                    <div class="checklist-item">Take-profits set?</div>
+                </div>
+                
+                <div class="danger-box">
+                    <strong>⚠️ If at least one point is NOT fulfilled → skip the trade!</strong>
+                </div>
+            </section>
+            
+            <section id="examples" class="section">
+                <h2 class="section-title">📊 REAL TRADE EXAMPLES</h2>
+                
+                <div class="example-box">
+                    <h3 style="color: var(--secondary-color);">✅ Example 1: Strong SHORT Signal</h3>
+                    
+                    <table>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Assessment</th>
+                        </tr>
+                        <tr>
+                            <td>Signal</td>
+                            <td>1000PEPE SHORT</td>
+                            <td><span class="badge badge-success">✅</span></td>
+                        </tr>
+                        <tr>
+                            <td>Liquidations</td>
+                            <td>962K USDT</td>
+                            <td><span class="badge badge-success">✅ Strong</span></td>
+                        </tr>
+                        <tr>
+                            <td>Price</td>
+                            <td>0.0051836</td>
+                            <td>Entry Price</td>
+                        </tr>
+                        <tr>
+                            <td>DayVol</td>
+                            <td>313.9M</td>
+                            <td><span class="badge badge-success">✅ High</span></td>
+                        </tr>
+                        <tr>
+                            <td>NATR</td>
+                            <td>0.84%</td>
+                            <td><span class="badge badge-success">✅ Optimal</span></td>
+                        </tr>
+                        <tr>
+                            <td>Corr BTC</td>
+                            <td>0.84</td>
+                            <td><span class="badge badge-warning">⚠️ Check BTC</span></td>
+                        </tr>
+                        <tr>
+                            <td>FR</td>
+                            <td>0.0099%</td>
+                            <td><span class="badge badge-success">✅ Perfect</span></td>
+                        </tr>
+                    </table>
+                    
+                    <div class="info-box">
+                        <strong>Result:</strong> Entered SHORT, TP1 +5%, TP2 +10%. Total profit: +7.5% to deposit
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+    <!-- Russian Footer -->
+    <div class="footer lang-content active" data-lang="ru">
+        <p><strong>⚠️ Дисклеймер</strong></p>
+        <p>Эта инструкция создана для образовательных целей. Торговля криптовалютами сопряжена с высоким риском потери капитала.</p>
+        <p>Никогда не инвестируйте средства, которые вы не можете позволить себе потерять.</p>
+        <p style="margin-top: 1rem; opacity: 0.7;">© 2026 Crypto Trading Guide</p>
+    </div>
+    
+    <!-- English Footer -->
+    <div class="footer lang-content" data-lang="en">
+        <p><strong>⚠️ Disclaimer</strong></p>
+        <p>This guide is created for educational purposes. Cryptocurrency trading involves high risk of capital loss.</p>
+        <p>Never invest funds that you cannot afford to lose.</p>
+        <p style="margin-top: 1rem; opacity: 0.7;">© 2026 Crypto Trading Guide</p>
+    </div>
+    
+    <a href="#" class="back-to-top">↑</a>
+    
+    <script>
+        // Language switcher
+        function switchLanguage(lang) {
+            // Hide all language content
+            document.querySelectorAll('.lang-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Show selected language content
+            document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => {
+                el.classList.add('active');
+            });
+            
+            // Update buttons
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById(`btn-${lang}`).classList.add('active');
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Save preference
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        // Load saved language preference
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang && savedLang !== 'ru') {
+                switchLanguage(savedLang);
+            }
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Show/hide back to top button
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'flex';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
