@@ -535,6 +535,16 @@
         </div>
     </div>
     
+    <nav class="nav">
+        <ul>
+            <li><a href="#intro">Введение / Intro</a></li>
+            <li><a href="#parameters">Параметры / Parameters</a></li>
+            <li><a href="#risk">Риски / Risk</a></li>
+            <li><a href="#exits">TP/SL</a></li>
+            <li><a href="#checklist">Чек-лист / Checklist</a></li>
+            <li><a href="#examples">Примеры / Examples</a></li>
+        </ul>
+    </nav>
     
     <div class="container">
         <!-- RUSSIAN CONTENT -->
@@ -689,6 +699,116 @@
                 </div>
             </section>
             
+            <section id="exits" class="section">
+                <h2 class="section-title">🎯 ТЕЙК-ПРОФИТЫ И СТОП-ЛОССЫ</h2>
+
+                <div class="warning-box">
+                    <strong>💡 Главный принцип:</strong> Крипта непредсказуема. Как только позиция в плюсе — <strong>защищайте прибыль</strong>. Не ждите идеального выхода.
+                </div>
+
+                <h3 class="subsection-title">📌 Как выставлять тейк-профиты</h3>
+
+                <div class="step-box">
+                    <h3>Схема разделения позиции (рекомендуется)</h3>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Уровень</th>
+                                <th>Цель</th>
+                                <th>Закрыть объём</th>
+                                <th>Действие со стопом</th>
+                            </tr>
+                            <tr>
+                                <td><strong>TP1</strong></td>
+                                <td>+4% – +5%</td>
+                                <td>30–40% позиции</td>
+                                <td>🔒 Перевести стоп в <strong>безубыток</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>TP2</strong></td>
+                                <td>+8% – +10%</td>
+                                <td>40–50% позиции</td>
+                                <td>🔄 Поставить <strong>трейлинг стоп</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>TP3 (опц.)</strong></td>
+                                <td>+15% – +20%</td>
+                                <td>Остаток</td>
+                                <td>Трейлинг стоп догоняет</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="info-box" style="margin-top:0.75rem">
+                        <strong>Логика:</strong> TP1 фиксирует реальную прибыль, TP2 даёт расти позиции дальше. Никогда не держите всё до одного уровня — рынок может развернуться в секунду.
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">🔒 Перевод в безубыток</h3>
+
+                <div class="parameter-box">
+                    <h3>Когда и как переводить стоп в безубыток</h3>
+                    <ul>
+                        <li><strong>Когда:</strong> Сразу после срабатывания TP1</li>
+                        <li><strong>Куда переносить стоп:</strong> На цену входа + небольшой буфер (0.1–0.2%) для покрытия комиссий</li>
+                        <li><strong>Зачем:</strong> Худший сценарий — выйти в ноль. Вы уже в безопасности</li>
+                    </ul>
+                    <div class="example-box">
+                        <h4>Пример (LONG):</h4>
+                        <p>Вход: 100 USDT → TP1 сработал на 105 USDT → переносим стоп с 98 на <strong>100.15 USDT</strong> (вход + буфер на комиссию). Теперь сделка гарантированно не убыточная.</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">🔄 Трейлинг стоп</h3>
+
+                <div class="parameter-box">
+                    <h3>Что такое трейлинг стоп и как им пользоваться</h3>
+                    <p>Трейлинг стоп — это стоп, который автоматически <strong>следует за ценой</strong> на фиксированное расстояние. Цена растёт — стоп тянется за ней. Цена откатывает на заданное расстояние — стоп срабатывает и фиксирует прибыль.</p>
+                    <div class="example-box" style="margin-top:0.75rem">
+                        <h4>Пример (LONG, трейлинг 1.5%):</h4>
+                        <ul>
+                            <li>Вход: 100 USDT, стоп активирован после TP1</li>
+                            <li>Цена выросла до 110 → трейлинг стоп стоит на <strong>108.35</strong></li>
+                            <li>Цена выросла до 120 → трейлинг стоп стоит на <strong>118.2</strong></li>
+                            <li>Цена откатила с 120 до 118.2 → <strong>позиция закрыта с прибылью +18.2%</strong></li>
+                        </ul>
+                    </div>
+                    <div class="info-box" style="margin-top:0.75rem">
+                        <strong>Рекомендуемый размер трейлинга:</strong><br>
+                        • Низкая волатильность (NATR &lt; 0.8%): 1–1.5%<br>
+                        • Средняя волатильность (NATR 0.8–1.5%): 1.5–2.5%<br>
+                        • Высокая волатильность (NATR &gt; 1.5%): 2.5–4%
+                    </div>
+                </div>
+
+                <div class="danger-box">
+                    <strong>⚠️ Трейлинг слишком узкий = выбьет раньше времени на шуме.</strong><br>
+                    <strong>⚠️ Трейлинг слишком широкий = вернёте большую часть прибыли.</strong><br>
+                    Ориентируйтесь на NATR × 2 как базовый размер трейлинга.
+                </div>
+
+                <h3 class="subsection-title">📋 Алгоритм действий после входа</h3>
+
+                <div class="checklist">
+                    <div class="checklist-item positive-item">Вошёл в позицию → <strong>сразу</strong> выставил SL на –1.5% / –2%</div>
+                    <div class="checklist-item positive-item">Выставил TP1 на +4–5% (30–40% объёма)</div>
+                    <div class="checklist-item positive-item">Выставил TP2 на +8–10% (40–50% объёма)</div>
+                    <div class="checklist-item positive-item">TP1 сработал → перенёс стоп в безубыток (цена входа +0.15%)</div>
+                    <div class="checklist-item positive-item">TP2 сработал → включил трейлинг стоп на остаток</div>
+                    <div class="checklist-item negative-item">НЕ передвигай SL вниз (для LONG), если цена идёт против тебя</div>
+                    <div class="checklist-item negative-item">НЕ отменяй стоп в надежде "отобьётся" — это путь к сливу депо</div>
+                    <div class="checklist-item negative-item">НЕ усредняйся в убыточную позицию без чёткого плана</div>
+                </div>
+
+                <div class="example-box">
+                    <h3>🧮 Быстрый расчёт уровней (пример LONG)</h3>
+                    <p><strong>Вход:</strong> 0.0051836 USDT (1000PEPE)<br>
+                    <strong>SL:</strong> 0.0051836 × 0.98 = <strong>0.0050799</strong> (–2%)<br>
+                    <strong>TP1:</strong> 0.0051836 × 1.045 = <strong>0.0054168</strong> (+4.5%)<br>
+                    <strong>TP2:</strong> 0.0051836 × 1.09 = <strong>0.0056501</strong> (+9%)<br>
+                    <strong>Безубыток:</strong> 0.0051836 × 1.002 = <strong>0.0051940</strong> (вход + комиссия)</p>
+                </div>
+            </section>
+
             <section id="checklist" class="section">
                 <h2 class="section-title">✅ ЧЕК-ЛИСТ ПЕРЕД СДЕЛКОЙ</h2>
                 
@@ -919,6 +1039,116 @@
                     <strong>⚠️ ALWAYS use stop-loss!</strong> No exceptions!
                 </div>
             </section>
+
+            <section id="exits" class="section">
+                <h2 class="section-title">🎯 TAKE-PROFITS &amp; STOP-LOSSES</h2>
+
+                <div class="warning-box">
+                    <strong>💡 Core principle:</strong> Crypto is unpredictable. Once the position is in profit — <strong>protect your gains</strong>. Don't wait for the perfect exit.
+                </div>
+
+                <h3 class="subsection-title">📌 How to set take-profits</h3>
+
+                <div class="step-box">
+                    <h3>Position splitting scheme (recommended)</h3>
+                    <div class="table-container">
+                        <table>
+                            <tr>
+                                <th>Level</th>
+                                <th>Target</th>
+                                <th>Close volume</th>
+                                <th>Stop action</th>
+                            </tr>
+                            <tr>
+                                <td><strong>TP1</strong></td>
+                                <td>+4% – +5%</td>
+                                <td>30–40% of position</td>
+                                <td>🔒 Move stop to <strong>breakeven</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>TP2</strong></td>
+                                <td>+8% – +10%</td>
+                                <td>40–50% of position</td>
+                                <td>🔄 Set <strong>trailing stop</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>TP3 (opt.)</strong></td>
+                                <td>+15% – +20%</td>
+                                <td>Remainder</td>
+                                <td>Trailing stop catches up</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="info-box" style="margin-top:0.75rem">
+                        <strong>Logic:</strong> TP1 locks in real profit, TP2 lets the position grow further. Never hold everything to one target — the market can reverse in seconds.
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">🔒 Moving to breakeven</h3>
+
+                <div class="parameter-box">
+                    <h3>When and how to move stop to breakeven</h3>
+                    <ul>
+                        <li><strong>When:</strong> Immediately after TP1 is triggered</li>
+                        <li><strong>Where to move stop:</strong> To entry price + small buffer (0.1–0.2%) to cover fees</li>
+                        <li><strong>Why:</strong> Worst case scenario — exit at zero. You're now safe</li>
+                    </ul>
+                    <div class="example-box">
+                        <h4>Example (LONG):</h4>
+                        <p>Entry: 100 USDT → TP1 triggered at 105 USDT → move stop from 98 to <strong>100.15 USDT</strong> (entry + fee buffer). The trade is now guaranteed non-losing.</p>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title">🔄 Trailing stop</h3>
+
+                <div class="parameter-box">
+                    <h3>What is a trailing stop and how to use it</h3>
+                    <p>A trailing stop is a stop that automatically <strong>follows the price</strong> at a fixed distance. Price rises — stop follows. Price pulls back by the set distance — stop triggers and locks in profit.</p>
+                    <div class="example-box" style="margin-top:0.75rem">
+                        <h4>Example (LONG, 1.5% trailing):</h4>
+                        <ul>
+                            <li>Entry: 100 USDT, trailing activated after TP1</li>
+                            <li>Price rose to 110 → trailing stop at <strong>108.35</strong></li>
+                            <li>Price rose to 120 → trailing stop at <strong>118.2</strong></li>
+                            <li>Price pulled back from 120 to 118.2 → <strong>position closed at +18.2% profit</strong></li>
+                        </ul>
+                    </div>
+                    <div class="info-box" style="margin-top:0.75rem">
+                        <strong>Recommended trailing size:</strong><br>
+                        • Low volatility (NATR &lt; 0.8%): 1–1.5%<br>
+                        • Medium volatility (NATR 0.8–1.5%): 1.5–2.5%<br>
+                        • High volatility (NATR &gt; 1.5%): 2.5–4%
+                    </div>
+                </div>
+
+                <div class="danger-box">
+                    <strong>⚠️ Trailing too tight = gets knocked out by noise prematurely.</strong><br>
+                    <strong>⚠️ Trailing too wide = you give back a large portion of profit.</strong><br>
+                    Use NATR × 2 as a baseline trailing size.
+                </div>
+
+                <h3 class="subsection-title">📋 Action algorithm after entry</h3>
+
+                <div class="checklist">
+                    <div class="checklist-item positive-item">Entered position → <strong>immediately</strong> set SL at –1.5% / –2%</div>
+                    <div class="checklist-item positive-item">Set TP1 at +4–5% (30–40% volume)</div>
+                    <div class="checklist-item positive-item">Set TP2 at +8–10% (40–50% volume)</div>
+                    <div class="checklist-item positive-item">TP1 triggered → moved stop to breakeven (entry price +0.15%)</div>
+                    <div class="checklist-item positive-item">TP2 triggered → activated trailing stop on remainder</div>
+                    <div class="checklist-item negative-item">DON'T move SL down (for LONG) if price moves against you</div>
+                    <div class="checklist-item negative-item">DON'T cancel stop hoping it will "recover" — that's how accounts get blown</div>
+                    <div class="checklist-item negative-item">DON'T average into a losing position without a clear plan</div>
+                </div>
+
+                <div class="example-box">
+                    <h3>🧮 Quick level calculation (LONG example)</h3>
+                    <p><strong>Entry:</strong> 0.0051836 USDT (1000PEPE)<br>
+                    <strong>SL:</strong> 0.0051836 × 0.98 = <strong>0.0050799</strong> (–2%)<br>
+                    <strong>TP1:</strong> 0.0051836 × 1.045 = <strong>0.0054168</strong> (+4.5%)<br>
+                    <strong>TP2:</strong> 0.0051836 × 1.09 = <strong>0.0056501</strong> (+9%)<br>
+                    <strong>Breakeven:</strong> 0.0051836 × 1.002 = <strong>0.0051940</strong> (entry + fee)</p>
+                </div>
+            </section>
             
             <section id="checklist" class="section">
                 <h2 class="section-title">✅ CHECKLIST BEFORE TRADE</h2>
@@ -1021,30 +1251,20 @@
     <script>
         // Language switcher
         function switchLanguage(lang) {
-            // Hide all language content
             document.querySelectorAll('.lang-content').forEach(el => {
                 el.classList.remove('active');
             });
-            
-            // Show selected language content
             document.querySelectorAll(`[data-lang="${lang}"]`).forEach(el => {
                 el.classList.add('active');
             });
-            
-            // Update buttons
             document.querySelectorAll('.language-switcher button').forEach(btn => {
                 btn.classList.remove('active');
             });
             document.getElementById(`btn-${lang}`).classList.add('active');
-            
-            // Update HTML lang attribute
             document.documentElement.lang = lang;
-            
-            // Save preference
             localStorage.setItem('preferredLanguage', lang);
         }
         
-        // Load saved language preference
         window.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('preferredLanguage');
             if (savedLang && savedLang !== 'ru') {
@@ -1052,21 +1272,16 @@
             }
         });
         
-        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
         
-        // Show/hide back to top button
         const backToTop = document.querySelector('.back-to-top');
         window.addEventListener('scroll', () => {
             if (window.pageYOffset > 300) {
