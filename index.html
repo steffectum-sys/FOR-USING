@@ -396,6 +396,14 @@
             display: block;
         }
         
+        .nav ul.lang-content {
+            display: none !important;
+        }
+        
+        .nav ul.lang-content.active {
+            display: flex !important;
+        }
+        
         /* Mobile optimizations */
         @media (max-width: 768px) {
             .header {
@@ -536,13 +544,21 @@
     </div>
     
     <nav class="nav">
-        <ul>
-            <li><a href="#intro">Введение / Intro</a></li>
-            <li><a href="#parameters">Параметры / Parameters</a></li>
-            <li><a href="#risk">Риски / Risk</a></li>
+        <ul class="lang-content active" data-lang="ru">
+            <li><a href="#intro">Введение</a></li>
+            <li><a href="#parameters">Параметры</a></li>
+            <li><a href="#risk">Риски</a></li>
             <li><a href="#exits">TP/SL</a></li>
-            <li><a href="#checklist">Чек-лист / Checklist</a></li>
-            <li><a href="#examples">Примеры / Examples</a></li>
+            <li><a href="#checklist">Чек-лист</a></li>
+            <li><a href="#examples">Примеры</a></li>
+        </ul>
+        <ul class="lang-content" data-lang="en">
+            <li><a href="#intro-en">Intro</a></li>
+            <li><a href="#parameters-en">Parameters</a></li>
+            <li><a href="#risk-en">Risk</a></li>
+            <li><a href="#exits-en">TP/SL</a></li>
+            <li><a href="#checklist-en">Checklist</a></li>
+            <li><a href="#examples-en">Examples</a></li>
         </ul>
     </nav>
     
@@ -890,12 +906,12 @@
         
         <!-- ENGLISH CONTENT -->
         <div class="lang-content" data-lang="en">
-            <section id="intro" class="section">
+            <section id="intro-en" class="section">
                 <h2 class="section-title">🎯 Introduction</h2>
                 <p>This guide will teach you how to trade cryptocurrency futures. The system is suitable for beginners and based on simple, clear signals.</p>
             </section>
             
-            <section id="parameters" class="section">
+            <section id="parameters-en" class="section">
                 <h2 class="section-title">📱 PARAMETER MEANINGS</h2>
                 <img src="111.png" alt="Signal Example"><p><em>(January 27, 2026, 1:48 UTC)</em></p>
                 
@@ -1002,7 +1018,7 @@
                 </div>
             </section>
             
-            <section id="risk" class="section">
+            <section id="risk-en" class="section">
                 <h2 class="section-title">⚠️ RISK MANAGEMENT</h2>
                 
                 <div class="danger-box">
@@ -1040,7 +1056,7 @@
                 </div>
             </section>
 
-            <section id="exits" class="section">
+            <section id="exits-en" class="section">
                 <h2 class="section-title">🎯 TAKE-PROFITS &amp; STOP-LOSSES</h2>
 
                 <div class="warning-box">
@@ -1150,7 +1166,7 @@
                 </div>
             </section>
             
-            <section id="checklist" class="section">
+            <section id="checklist-en" class="section">
                 <h2 class="section-title">✅ CHECKLIST BEFORE TRADE</h2>
                 
                 <div class="checklist">
@@ -1171,7 +1187,7 @@
                 </div>
             </section>
             
-            <section id="examples" class="section">
+            <section id="examples-en" class="section">
                 <h2 class="section-title">📊 REAL TRADE EXAMPLES</h2>
                 
                 <div class="example-box">
