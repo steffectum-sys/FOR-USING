@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trading Guide | Инструкция по торговле</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -522,10 +525,346 @@
             }
         }
     </style>
+    <style>
+        :root {
+            --bg: #07090d;
+            --bg-elevated: #0c1017;
+            --surface: rgba(18, 23, 34, .72);
+            --surface-strong: #121722;
+            --line: rgba(255, 255, 255, .09);
+            --line-bright: rgba(255, 255, 255, .16);
+            --text: #f4f7fb;
+            --muted: #8d97a8;
+            --blue: #7c8cff;
+            --violet: #9a6cff;
+            --green: #31e59b;
+            --red: #ff5d73;
+            --amber: #ffca5c;
+            --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+            --sans: "Roboto", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --display: "Roboto", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            --radius: 22px;
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+        body {
+            margin: 0;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 78% 2%, rgba(124, 140, 255, .14), transparent 30rem),
+                radial-gradient(circle at 2% 35%, rgba(49, 229, 155, .06), transparent 28rem),
+                var(--bg);
+            font-family: var(--sans);
+            line-height: 1.65;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .28;
+            background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+            background-size: 64px 64px;
+            mask-image: linear-gradient(to bottom, black, transparent 70%);
+        }
+        ::selection { background: rgba(124, 140, 255, .36); color: #fff; }
+        a, button, input { -webkit-tap-highlight-color: transparent; }
+        a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--green); outline-offset: 4px; }
+
+        .topbar {
+            width: min(1440px, calc(100% - 40px));
+            height: 82px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 4;
+        }
+        .brand { display: flex; align-items: center; gap: 12px; font-weight: 760; letter-spacing: -.02em; }
+        .brand-mark { width: 34px; height: 34px; border: 1px solid var(--line-bright); border-radius: 10px; display: grid; place-items: center; background: rgba(255,255,255,.04); }
+        .brand-mark svg { width: 20px; }
+        .brand span:last-child { color: var(--muted); font-weight: 520; }
+        .top-actions { display: flex; align-items: center; gap: 12px; }
+        .status-pill { font: 650 11px/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--green); padding: 10px 12px; border: 1px solid rgba(49,229,155,.2); background: rgba(49,229,155,.06); border-radius: 999px; }
+        .status-pill::before { content: ""; display: inline-block; width: 6px; height: 6px; margin-right: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 14px var(--green); animation: pulse 2s infinite; }
+        @keyframes pulse { 50% { opacity: .38; } }
+
+        .language-switcher { display: flex; gap: 3px; margin: 0; padding: 3px; max-width: none; border: 1px solid var(--line); background: rgba(255,255,255,.035); border-radius: 12px; backdrop-filter: blur(16px); }
+        .language-switcher button { border: 0; color: var(--muted); padding: 8px 11px; border-radius: 8px; font: 700 11px/1 var(--mono); min-width: 40px; }
+        .language-switcher button:hover { background: rgba(255,255,255,.06); color: var(--text); }
+        .language-switcher button.active { background: #f4f7fb; color: #080a0e; }
+
+        .hero { width: min(1440px, calc(100% - 40px)); min-height: 710px; margin: 0 auto; display: grid; grid-template-columns: .92fr 1.08fr; align-items: center; gap: clamp(42px, 7vw, 110px); padding: 54px 0 96px; position: relative; z-index: 2; }
+        .hero-copy { padding-left: clamp(0px, 2.5vw, 36px); }
+        .eyebrow { display: flex; align-items: center; gap: 12px; color: #aab1c0; font: 650 12px/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 28px; }
+        .eyebrow.lang-content:not(.active) { display: none; }
+        .eyebrow::before { content: ""; width: 30px; height: 1px; background: var(--green); box-shadow: 0 0 12px var(--green); }
+        .hero h1 { margin: 0; max-width: 780px; color: var(--text); font-family: var(--display); font-size: clamp(52px, 6.2vw, 96px); line-height: .91; letter-spacing: -.052em; font-weight: 800; text-align: left; }
+        .hero h1 em { display: block; color: transparent; font-style: normal; background: linear-gradient(100deg, #fff 0%, #aeb8ff 48%, #8f69ff 100%); background-clip: text; -webkit-background-clip: text; }
+        .hero-sub { max-width: 610px; margin: 30px 0 0; color: #a8b0bf; font-size: clamp(17px, 1.4vw, 21px); line-height: 1.55; }
+        .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 38px; }
+        .btn { min-height: 52px; padding: 0 20px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 13px; border: 1px solid var(--line); color: var(--text); text-decoration: none; font-weight: 720; transition: .25s cubic-bezier(.2,.8,.2,1); }
+        .btn-primary { color: #07090d; background: #f5f7fb; border-color: #fff; box-shadow: 0 10px 36px rgba(255,255,255,.12); }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 44px rgba(124,140,255,.25); }
+        .btn-ghost:hover { border-color: var(--line-bright); background: rgba(255,255,255,.05); transform: translateY(-2px); }
+        .hero-note { display: flex; gap: 18px; margin-top: 28px; color: var(--muted); font: 600 11px/1.4 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+        .hero-note span::before { content: "✓"; color: var(--green); margin-right: 7px; }
+
+        .terminal { position: relative; min-width: 0; border: 1px solid var(--line-bright); border-radius: 24px; overflow: hidden; background: rgba(10,13,19,.86); box-shadow: 0 40px 120px rgba(0,0,0,.52), 0 0 80px rgba(124,140,255,.08); backdrop-filter: blur(24px); transform: perspective(1200px) rotateY(-2deg) rotateX(1deg); }
+        .terminal::after { content: ""; position: absolute; width: 240px; height: 240px; right: -80px; top: -100px; border-radius: 50%; background: rgba(124,140,255,.15); filter: blur(60px); pointer-events: none; }
+        .terminal-head { height: 52px; padding: 0 17px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.018); }
+        .terminal-pair { display: flex; align-items: center; gap: 9px; font: 700 12px/1 var(--mono); }
+        .pair-icon { width: 23px; height: 23px; display: grid; place-items: center; border-radius: 50%; color: #17111d; background: linear-gradient(145deg, #c4d06e, #78a76e); font-size: 10px; }
+        .terminal-time { color: var(--muted); font: 600 10px/1 var(--mono); }
+        .chart-area { position: relative; height: 360px; padding: 28px 18px 16px; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 100% 58px, 72px 100%; }
+        .chart-meta { position: absolute; z-index: 2; top: 22px; left: 22px; }
+        .live-price { font: 700 clamp(25px, 2vw, 34px)/1 var(--mono); letter-spacing: -.04em; }
+        .price-change { margin-top: 7px; color: var(--red); font: 700 11px/1 var(--mono); }
+        .chart-svg { width: 100%; height: 100%; overflow: visible; }
+        .candle { transform-box: fill-box; transform-origin: center bottom; animation: candleIn .48s both cubic-bezier(.16,1,.3,1); }
+        .candle.up rect { fill: var(--green); }
+        .candle.up line { stroke: var(--green); }
+        .candle.down rect { fill: var(--red); }
+        .candle.down line { stroke: var(--red); }
+        .candle line { stroke-width: 1.5; }
+        @keyframes candleIn { from { opacity: 0; transform: scaleY(.06) translateY(14px); } to { opacity: 1; transform: scaleY(1) translateY(0); } }
+        .trade-line { stroke-dasharray: 5 6; opacity: .75; }
+        .trade-label { font: 700 9px var(--mono); }
+        .risk-zone { fill: rgba(255,93,115,.055); }
+        .reward-zone { fill: rgba(49,229,155,.045); }
+        .entry-moment { stroke: rgba(255,255,255,.22); stroke-dasharray: 3 6; }
+        .entry-dot { fill: #ff5d73; stroke: #fff; stroke-width: 2; filter: drop-shadow(0 0 8px rgba(255,93,115,.8)); animation: entryPulse 1.8s infinite; }
+        .entry-callout { fill: #fff; font: 700 9px var(--mono); letter-spacing: .06em; }
+        @keyframes entryPulse { 50% { r: 7; opacity: .72; } }
+        .current-price-line { animation: pricePulse 1.8s infinite; }
+        @keyframes pricePulse { 50% { opacity: .35; } }
+        .signal-dock { padding: 15px; display: grid; grid-template-columns: 1.35fr repeat(3, 1fr); gap: 9px; border-top: 1px solid var(--line); }
+        .metric { min-width: 0; padding: 13px; border: 1px solid var(--line); background: rgba(255,255,255,.025); border-radius: 13px; }
+        .metric-label { display: block; margin-bottom: 8px; color: var(--muted); font: 650 9px/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+        .metric-value { display: block; overflow: hidden; text-overflow: ellipsis; color: var(--text); font: 700 13px/1 var(--mono); white-space: nowrap; }
+        .metric.signal { background: rgba(255,93,115,.07); border-color: rgba(255,93,115,.22); }
+        .metric.signal .metric-value { color: var(--red); }
+
+        .header { display: none; }
+        .nav { top: 0; padding: 0; color: var(--text); background: rgba(7,9,13,.76); border-block: 1px solid var(--line); box-shadow: none; backdrop-filter: blur(20px); z-index: 99; }
+        .nav-inner { width: min(1440px, calc(100% - 40px)); margin: auto; display: flex; align-items: center; }
+        .nav-progress { width: 180px; flex: 0 0 180px; padding-right: 28px; }
+        .progress-label { display: flex; justify-content: space-between; color: var(--muted); font: 650 9px/1 var(--mono); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+        .progress-track { height: 2px; background: rgba(255,255,255,.08); overflow: hidden; }
+        .progress-value { width: 0; height: 100%; background: linear-gradient(90deg, var(--blue), var(--green)); box-shadow: 0 0 10px var(--green); }
+        .nav ul { gap: 2px; margin: 0; padding: 10px 0; }
+        .nav a { color: #8993a3; font-size: 12px; font-weight: 650; padding: 9px 13px; border-radius: 9px; }
+        .nav a:hover, .nav a:active, .nav a.active { color: var(--text); background: rgba(255,255,255,.06); }
+
+        .container { width: min(1280px, calc(100% - 40px)); max-width: none; margin: 0 auto; padding: 110px 0 50px; position: relative; z-index: 2; }
+        .section { position: relative; margin: 0 0 104px; padding: clamp(28px, 5vw, 64px); color: var(--text); background: linear-gradient(145deg, rgba(19,24,35,.88), rgba(12,16,23,.72)); border: 1px solid var(--line); border-radius: 28px; box-shadow: 0 34px 100px rgba(0,0,0,.2); overflow: hidden; }
+        .section::before { content: attr(data-index); position: absolute; right: 34px; top: 14px; color: rgba(255,255,255,.025); font: 800 clamp(72px, 10vw, 150px)/1 var(--mono); letter-spacing: -.08em; pointer-events: none; }
+        .section-title { max-width: 850px; color: var(--text); font-family: var(--display); font-weight: 700; font-size: clamp(36px, 5vw, 68px); line-height: 1; letter-spacing: -.042em; margin: 0 0 34px; padding: 0; border: 0; text-transform: none; }
+        .section > p { max-width: 790px; color: #aab2c0; font-size: 18px; }
+        .subsection-title { margin: 62px 0 22px; padding: 0; border: 0; color: #f3f5fa; font-size: clamp(24px, 3vw, 36px); letter-spacing: -.03em; }
+
+        #parameters, #parameters-en { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+        #parameters .section-title, #parameters-en .section-title, .signal-overview { grid-column: 1 / -1; }
+        .signal-overview { position: relative; display: grid; grid-template-columns: minmax(280px, .78fr) 1.22fr; gap: clamp(24px, 4vw, 52px); align-items: stretch; margin-bottom: 18px; padding: clamp(18px, 3vw, 34px); border: 1px solid var(--line); border-radius: 24px; background: radial-gradient(circle at 15% 20%, rgba(124,140,255,.1), transparent 36%), rgba(255,255,255,.018); overflow: hidden; }
+        .signal-overview::after { content: ""; position: absolute; inset: -80% -25%; pointer-events: none; background: linear-gradient(105deg, transparent 42%, rgba(124,140,255,.065) 49%, rgba(49,229,155,.055) 51%, transparent 58%); transform: translateX(-45%); animation: scanSignal 8s 2s infinite cubic-bezier(.2,.8,.2,1); }
+        @keyframes scanSignal { 0%, 58% { transform: translateX(-45%); } 82%, 100% { transform: translateX(45%); } }
+        .signal-shot { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 0; }
+        .signal-shot img { width: min(100%, 350px); max-height: 520px; object-fit: contain; margin: 0; padding: 7px; border: 1px solid var(--line-bright); border-radius: 20px; background: #090c12; box-shadow: 0 28px 70px rgba(0,0,0,.42); }
+        .signal-shot p { width: min(100%, 350px); margin: 12px 0 0; color: var(--muted); font: 600 10px/1.4 var(--mono); }
+        .signal-summary { display: flex; flex-direction: column; justify-content: center; }
+        .signal-kicker { color: var(--red); font: 700 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+        .signal-summary h3 { margin: 15px 0 12px; color: var(--text); font: 600 clamp(28px, 3.2vw, 45px)/1.05 var(--display); letter-spacing: -.04em; }
+        .signal-summary > p { margin: 0 0 24px; color: #aab2c0; font-size: 16px; }
+        .signal-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; }
+        .signal-fact { display: flex; justify-content: space-between; gap: 12px; padding: 13px 14px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.025); transition: transform .25s, border-color .25s, background .25s; }
+        .signal-fact:hover { transform: translateY(-2px); border-color: rgba(49,229,155,.24); background: rgba(49,229,155,.04); }
+        .signal-fact span { color: var(--muted); font: 650 10px/1.25 var(--mono); text-transform: uppercase; }
+        .signal-fact strong { font: 700 12px/1.25 var(--mono); }
+        .signal-fact.good strong { color: var(--green); }
+        #parameters .parameter-box, #parameters-en .parameter-box { grid-column: span 4; }
+
+        .parameter-box, .step-box, .example-box, .info-box, .warning-box, .danger-box, .checklist { color: #b3bbc8; background: rgba(255,255,255,.025); border: 1px solid var(--line); border-left: 1px solid var(--line); border-radius: 18px; box-shadow: none; }
+        .parameter-box, .step-box { margin: 0; padding: 22px; transition: border-color .25s, background .25s, transform .25s; }
+        .parameter-box:hover, .step-box:hover { border-color: rgba(124,140,255,.3); background: rgba(124,140,255,.045); transform: translateY(-3px); }
+        .parameter-box h3, .step-box h3 { color: var(--text); font-size: 17px; line-height: 1.35; letter-spacing: -.02em; }
+        .parameter-box > h3 { display: flex; justify-content: space-between; align-items: start; cursor: pointer; }
+        .parameter-box > h3::after { content: "+"; color: var(--muted); font: 400 20px/1 var(--mono); transition: transform .25s; }
+        .parameter-box.expanded > h3::after { transform: rotate(45deg); }
+        .parameter-box p, .parameter-box ul, .parameter-box > div { transition: opacity .25s, max-height .35s, margin .35s; }
+        .parameter-box.collapsible:not(.expanded) > p, .parameter-box.collapsible:not(.expanded) > ul, .parameter-box.collapsible:not(.expanded) > div { max-height: 0; margin-block: 0; opacity: 0; overflow: hidden; }
+        .parameter-box.collapsible.expanded > p, .parameter-box.collapsible.expanded > ul, .parameter-box.collapsible.expanded > div { max-height: 900px; opacity: 1; }
+        .info-box, .warning-box, .danger-box, .example-box { margin: 14px 0 0; padding: 16px; font-weight: 500; }
+        .info-box { border-color: rgba(49,229,155,.18); background: rgba(49,229,155,.045); }
+        .warning-box { border-color: rgba(255,202,92,.2); background: rgba(255,202,92,.055); }
+        .danger-box { color: #ffc0c8; border-color: rgba(255,93,115,.22); background: rgba(255,93,115,.06); }
+        .example-box h3, .example-box h4 { color: var(--green); }
+        .highlight { color: var(--amber); background: rgba(255,202,92,.08); }
+        ul { margin-left: 18px; }
+        li::marker { color: #667085; }
+        strong { color: #edf1f7; }
+        .badge { margin-left: 5px; padding: 4px 8px; border-radius: 7px; font: 700 10px/1 var(--mono); }
+        .badge-success { color: var(--green); background: rgba(49,229,155,.1); }
+        .badge-warning { color: var(--amber); background: rgba(255,202,92,.1); }
+        .badge-danger { color: var(--red); background: rgba(255,93,115,.1); }
+
+        #risk, #risk-en { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+        #risk .section-title, #risk-en .section-title, #risk > .danger-box, #risk-en > .danger-box, #risk > .warning-box, #risk-en > .warning-box { grid-column: 1 / -1; }
+        #risk > .danger-box, #risk-en > .danger-box { position: relative; margin: 0; padding: 22px 24px 22px 74px; background: linear-gradient(100deg, rgba(255,93,115,.1), rgba(255,93,115,.025)); overflow: hidden; }
+        #risk > .danger-box::before, #risk-en > .danger-box::before { content: "!"; position: absolute; left: 24px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; display: grid; place-items: center; color: #17080b; background: var(--red); border-radius: 50%; font: 800 17px/1 var(--mono); box-shadow: 0 0 26px rgba(255,93,115,.3); }
+        #risk > .danger-box h3, #risk-en > .danger-box h3 { margin: 0 0 4px; color: #fff; font: 600 19px/1.25 var(--display); }
+        #risk > .danger-box p, #risk-en > .danger-box p { margin: 0; color: #bc8790; font-size: 13px; }
+        #risk > .step-box, #risk-en > .step-box { position: relative; grid-column: span 4; min-height: 230px; padding: 26px; overflow: hidden; }
+        #risk > .step-box::after, #risk-en > .step-box::after { content: attr(data-rule); position: absolute; right: 14px; bottom: -14px; color: rgba(255,255,255,.035); font: 800 86px/1 var(--display); pointer-events: none; }
+        #risk > .step-box h3, #risk-en > .step-box h3 { max-width: 82%; margin-top: 0; font: 600 20px/1.2 var(--display); }
+        #risk > .warning-box, #risk-en > .warning-box { margin: 0; padding: 16px 20px; text-align: center; }
+        .risk-calculator { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1.1fr; gap: 28px; margin-top: 10px; padding: 26px; border-radius: 20px; border: 1px solid rgba(124,140,255,.2); background: linear-gradient(135deg, rgba(124,140,255,.08), rgba(49,229,155,.035)); }
+        .risk-calculator h3 { margin: 0 0 8px; font: 600 26px/1.1 var(--display); letter-spacing: -.03em; }
+        .risk-calculator p { color: var(--muted); margin: 0; }
+        .risk-controls { display: grid; gap: 14px; }
+        .range-row { display: grid; grid-template-columns: 100px 1fr 70px; align-items: center; gap: 12px; font: 650 11px/1 var(--mono); color: var(--muted); }
+        .range-row output { color: var(--text); text-align: right; }
+        input[type="range"] { width: 100%; accent-color: var(--green); }
+        .risk-result { margin-top: 5px; display: flex; justify-content: space-between; align-items: baseline; padding-top: 14px; border-top: 1px solid var(--line); }
+        .risk-result span:first-child { color: var(--muted); font: 650 10px/1 var(--mono); text-transform: uppercase; }
+        .risk-result strong { color: var(--green); font: 750 25px/1 var(--mono); }
+
+        .table-container { margin: 18px 0; border: 1px solid var(--line); border-radius: 15px; overflow: auto; box-shadow: none; }
+        table { min-width: 620px; box-shadow: none; }
+        th { color: #939daf; background: rgba(255,255,255,.035); padding: 15px; font: 700 10px/1 var(--mono); text-transform: uppercase; letter-spacing: .07em; }
+        td { color: #c5cbd5; padding: 15px; border-bottom-color: var(--line); font: 540 13px/1.45 var(--mono); }
+        tr:nth-child(even) { background: rgba(255,255,255,.018); }
+        tr:hover { background: rgba(124,140,255,.04); }
+        .checklist { padding: 12px 18px; }
+        .checklist-item { position: relative; padding: 13px 8px 13px 38px; border-bottom: 1px solid var(--line); cursor: pointer; }
+        .checklist-item:last-child { border-bottom: 0; }
+        .checklist-item::before { content: ""; position: absolute; left: 7px; top: 17px; width: 14px; height: 14px; margin: 0; border: 1px solid #596272; border-radius: 4px; }
+        .checklist-item.checked { color: #7b8493; text-decoration: line-through; }
+        .checklist-item.checked::before, .checklist-item.positive-item::before { content: "✓"; display: grid; place-items: center; color: #08130f; border-color: var(--green); background: var(--green); font: 800 10px/1 var(--mono); }
+        .checklist-item.negative-item::before { content: "!"; display: grid; place-items: center; color: #18090c; border-color: var(--red); background: var(--red); font: 800 10px/1 var(--mono); }
+
+        .footer { width: min(1280px, calc(100% - 40px)); margin: 0 auto 24px; padding: 34px; text-align: left; color: var(--muted); background: rgba(255,255,255,.025); border: 1px solid var(--line); border-radius: 24px; }
+        .footer strong { color: var(--amber); }
+        .back-to-top { width: 48px; height: 48px; right: 22px; bottom: 22px; color: var(--text); background: rgba(22,27,39,.9); border: 1px solid var(--line-bright); box-shadow: 0 16px 40px rgba(0,0,0,.32); backdrop-filter: blur(16px); }
+        .back-to-top:hover { color: #080a0e; background: var(--text); transform: translateY(-4px); }
+        .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        @media (max-width: 1020px) {
+            .hero { grid-template-columns: 1fr; padding-top: 70px; }
+            .hero-copy { padding-left: 0; }
+            .terminal { max-width: 760px; transform: none; }
+            #parameters .parameter-box, #parameters-en .parameter-box { grid-column: span 6; }
+            #risk > .step-box, #risk-en > .step-box { grid-column: span 6; }
+            #risk > .step-box[data-rule="03"], #risk-en > .step-box[data-rule="03"] { grid-column: 1 / -1; min-height: 180px; }
+        }
+        @media (max-width: 760px) {
+            .topbar, .hero, .nav-inner, .container, .footer { width: min(100% - 24px, 1280px); }
+            .topbar { height: 68px; }
+            .brand span:last-child, .status-pill { display: none; }
+            .hero { min-height: auto; gap: 48px; padding: 46px 0 70px; }
+            .hero h1 { font-size: clamp(48px, 15vw, 72px); }
+            .hero-sub { font-size: 16px; }
+            .hero-note { flex-direction: column; gap: 8px; }
+            .terminal { border-radius: 18px; }
+            .chart-area { height: 300px; }
+            .signal-dock { grid-template-columns: 1fr 1fr; }
+            .nav-progress { display: none; }
+            .nav ul { padding-left: 0; }
+            .container { padding-top: 68px; }
+            .section { padding: 24px 18px; margin-bottom: 56px; border-radius: 20px; }
+            .section-title { font-size: 39px; margin-bottom: 26px; }
+            #parameters, #parameters-en { display: block; }
+            .signal-overview { grid-template-columns: 1fr; padding: 16px; }
+            .signal-summary { padding: 6px 2px 2px; }
+            .signal-facts { grid-template-columns: 1fr; }
+            #parameters .parameter-box, #parameters-en .parameter-box { margin-top: 12px; }
+            #risk, #risk-en { display: block; }
+            #risk > *, #risk-en > * { margin-top: 14px; }
+            #risk > .step-box, #risk-en > .step-box { min-height: auto; }
+            .risk-calculator { grid-template-columns: 1fr; }
+            .range-row { grid-template-columns: 76px 1fr 62px; }
+            .footer { padding: 24px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+            .reveal { opacity: 1; transform: none; }
+        }
+    </style>
 </head>
 <body>
+    <div class="topbar">
+        <div class="brand">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5 9 12l3 3 7-8" stroke="#31e59b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7h4v4" stroke="#31e59b" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+            <span>Signal<span> / Playbook</span></span>
+        </div>
+        <div class="top-actions">
+            <span class="status-pill">Guide online</span>
+            <div class="language-switcher" aria-label="Language">
+                <button onclick="switchLanguage('ru')" id="btn-ru" class="active">RU</button>
+                <button onclick="switchLanguage('en')" id="btn-en">EN</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="hero">
+        <div class="hero-copy">
+            <div class="eyebrow lang-content active" data-lang="ru">Практическое руководство · 2026</div>
+            <div class="eyebrow lang-content" data-lang="en">Practical playbook · 2026</div>
+            <div class="lang-content active" data-lang="ru">
+                <h1>Читай сигнал.<em>Управляй риском.</em></h1>
+                <p class="hero-sub">Системный разбор сигналов торгового бота — от параметров входа до фиксации прибыли. Без обещаний. Только логика, уровни и дисциплина.</p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="#parameters">Начать разбор <span>↓</span></a>
+                    <a class="btn btn-ghost" href="#checklist">Чек-лист сделки</a>
+                </div>
+                <div class="hero-note"><span>RU / EN</span><span>Для новичков</span><span>7 параметров сигнала</span></div>
+            </div>
+            <div class="lang-content" data-lang="en">
+                <h1>Read the signal.<em>Control the risk.</em></h1>
+                <p class="hero-sub">A systematic bot-signal playbook — from entry parameters to profit protection. No promises. Just logic, levels and discipline.</p>
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="#parameters-en">Start the guide <span>↓</span></a>
+                    <a class="btn btn-ghost" href="#checklist-en">Trade checklist</a>
+                </div>
+                <div class="hero-note"><span>RU / EN</span><span>Beginner friendly</span><span>7 signal metrics</span></div>
+            </div>
+        </div>
+        <div class="terminal" aria-label="Демонстрационный торговый график">
+            <div class="terminal-head">
+                <div class="terminal-pair"><span class="pair-icon">P</span>1000PEPE / USDT</div>
+                <span class="terminal-time">15m · DEMO FEED</span>
+            </div>
+            <div class="chart-area">
+                <div class="chart-meta"><div class="live-price" id="livePrice">0.0050312</div><div class="price-change">−3.42% · SHORT IN PROFIT</div></div>
+                <svg class="chart-svg" viewBox="0 0 700 330" preserveAspectRatio="none" aria-hidden="true">
+                    <rect class="risk-zone" x="282" y="28" width="418" height="83"/>
+                    <rect class="reward-zone" x="282" y="111" width="418" height="162"/>
+                    <text class="trade-label" x="300" y="48" fill="#ff8494">RISK ZONE</text>
+                    <text class="trade-label" x="300" y="137" fill="#51e9aa">PROFIT ZONE</text>
+                    <g id="candles"></g>
+                    <line class="entry-moment" x1="282" y1="28" x2="282" y2="300"/>
+                    <line class="trade-line" x1="282" y1="28" x2="700" y2="28" stroke="#ffca5c"/><text class="trade-label" x="610" y="20" fill="#ffca5c">STOP LOSS</text>
+                    <line class="trade-line" x1="282" y1="111" x2="700" y2="111" stroke="#ff5d73"/><text class="trade-label" x="605" y="102" fill="#ff7d8e">SHORT ENTRY</text>
+                    <circle class="entry-dot" cx="282" cy="111" r="5"/><path d="M252 85 L276 105" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M276 105 L269 102 L273 97Z" fill="#fff"/><text class="entry-callout" x="205" y="78">ENTRY AFTER CONFIRMATION</text>
+                    <line class="trade-line" x1="282" y1="224" x2="700" y2="224" stroke="#31e59b"/><text class="trade-label" x="625" y="215" fill="#31e59b">TP1</text>
+                    <line class="trade-line current-price-line" x1="282" y1="288" x2="700" y2="288" stroke="#7c8cff"/><text class="trade-label" x="596" y="280" fill="#9aa6ff">CURRENT</text>
+                </svg>
+            </div>
+            <div class="signal-dock">
+                <div class="metric signal"><span class="metric-label">Signal</span><span class="metric-value">SHORT · 87%</span></div>
+                <div class="metric"><span class="metric-label">Liquidations</span><span class="metric-value">962K</span></div>
+                <div class="metric"><span class="metric-label">NATR</span><span class="metric-value">0.84%</span></div>
+                <div class="metric"><span class="metric-label">Corr BTC</span><span class="metric-value">0.84</span></div>
+            </div>
+        </div>
+    </main>
     <div class="header">
-        <div class="language-switcher">
+        <div class="language-switcher" hidden>
             <button onclick="switchLanguage('ru')" id="btn-ru" class="active">🇷🇺 RU</button>
             <button onclick="switchLanguage('en')" id="btn-en">🇬🇧 EN</button>
         </div>
@@ -544,6 +883,11 @@
     </div>
     
     <nav class="nav">
+        <div class="nav-inner">
+        <div class="nav-progress" aria-hidden="true">
+            <div class="progress-label"><span>Progress</span><span id="progressText">0%</span></div>
+            <div class="progress-track"><div class="progress-value" id="progressValue"></div></div>
+        </div>
         <ul class="lang-content active" data-lang="ru">
             <li><a href="#intro">Введение</a></li>
             <li><a href="#parameters">Параметры</a></li>
@@ -560,19 +904,35 @@
             <li><a href="#checklist-en">Checklist</a></li>
             <li><a href="#examples-en">Examples</a></li>
         </ul>
+        </div>
     </nav>
     
     <div class="container">
         <!-- RUSSIAN CONTENT -->
         <div class="lang-content active" data-lang="ru">
             <section id="intro" class="section">
-                <h2 class="section-title">🎯 Введение</h2>
+                <h2 class="section-title">Начните с системы</h2>
                 <p>Эта инструкция научит вас торговать на фьючерсах криптовалют. Система подходит для новичков и основана на простых, понятных сигналах.</p>
             </section>
             
             <section id="parameters" class="section">
-                <h2 class="section-title">📱 ЧТО ОЗНАЧАЕТ КАЖДЫЙ ПАРАМЕТР</h2>
-                <img src="111.png" alt="Пример сигнала"><p><em>(January 27, 2026, 1:48 UTC)</em></p>
+                <h2 class="section-title">Как читать параметры сигнала</h2>
+                <div class="signal-overview">
+                    <div class="signal-shot"><img src="111.png" alt="Пример сигнала"><p><em>January 27, 2026 · 1:48 UTC</em></p></div>
+                    <div class="signal-summary">
+                        <span class="signal-kicker">Разбор входящего сигнала</span>
+                        <h3>Сначала читаем контекст. Потом нажимаем кнопку.</h3>
+                        <p>На одном экране бот даёт направление, силу импульса, ликвидность и связь с рынком. Ни один параметр не оценивается изолированно.</p>
+                        <div class="signal-facts">
+                            <div class="signal-fact"><span>Направление</span><strong style="color:var(--red)">SHORT</strong></div>
+                            <div class="signal-fact good"><span>Ликвидации</span><strong>962K</strong></div>
+                            <div class="signal-fact good"><span>DayVol</span><strong>313.9M</strong></div>
+                            <div class="signal-fact good"><span>NATR</span><strong>0.84%</strong></div>
+                            <div class="signal-fact"><span>Corr BTC</span><strong>0.84</strong></div>
+                            <div class="signal-fact good"><span>Funding</span><strong>0.0099%</strong></div>
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="parameter-box">
                     <h3>1. 1000PEPE SHORT 🔴</h3>
@@ -678,13 +1038,14 @@
             </section>
             
             <section id="risk" class="section">
-                <h2 class="section-title">⚠️ УПРАВЛЕНИЕ РИСКАМИ</h2>
+                <h2 class="section-title">Управление рисками</h2>
                 
                 <div class="danger-box">
-                    <h3>🚨 Золотые правила риск-менеджмента:</h3>
+                    <h3>Риск определяется до входа</h3>
+                    <p>Сначала сумма ордера, стоп и цель — только потом открытие позиции.</p>
                 </div>
                 
-                <div class="step-box">
+                <div class="step-box" data-rule="01">
                     <h3>1. Размер позиции</h3>
                     <p>Никогда не рискуйте больше <span class="highlight">1-2% депозита</span> на одну сделку</p>
                     <div class="example-box">
@@ -692,7 +1053,7 @@
                     </div>
                 </div>
                 
-                <div class="step-box">
+                <div class="step-box" data-rule="02">
                     <h3>2. Плечо (Leverage)</h3>
                     <ul>
                         <li>Новички: <span class="badge badge-success">3x-5x</span> максимум</li>
@@ -701,7 +1062,7 @@
                     </ul>
                 </div>
                 
-                <div class="step-box">
+                <div class="step-box" data-rule="03">
                     <h3>3. Соотношение риск/прибыль</h3>
                     <p>Минимум <strong>1:2</strong></p>
                     <ul>
@@ -713,10 +1074,22 @@
                 <div class="warning-box">
                     <strong>⚠️ ВСЕГДА используйте стоп-лосс!</strong> Без исключений!
                 </div>
+
+                <div class="risk-calculator" data-calculator="ru">
+                    <div>
+                        <h3>Размер ордера</h3>
+                        <p>Выберите, какую долю баланса использовать для одного входа. Например, 2% от 1 000 USDT — это ордер на 20 USDT.</p>
+                    </div>
+                    <div class="risk-controls">
+                        <label class="range-row"><span>Депозит</span><input class="deposit-range" type="range" min="100" max="10000" step="100" value="1000"><output class="deposit-output">1 000 USDT</output></label>
+                        <label class="range-row"><span>В ордер</span><input class="risk-range" type="range" min="0.5" max="10" step="0.5" value="2"><output class="risk-output">2.0%</output></label>
+                        <div class="risk-result"><span>Сумма ордера</span><strong class="risk-amount">20.00 USDT</strong></div>
+                    </div>
+                </div>
             </section>
             
             <section id="exits" class="section">
-                <h2 class="section-title">🎯 ТЕЙК-ПРОФИТЫ И СТОП-ЛОССЫ</h2>
+                <h2 class="section-title">Тейк-профиты и стоп-лоссы</h2>
 
                 <div class="warning-box">
                     <strong>💡 Главный принцип:</strong> Крипта непредсказуема. Как только позиция в плюсе — <strong>защищайте прибыль</strong>. Не ждите идеального выхода.
@@ -826,7 +1199,7 @@
             </section>
 
             <section id="checklist" class="section">
-                <h2 class="section-title">✅ ЧЕК-ЛИСТ ПЕРЕД СДЕЛКОЙ</h2>
+                <h2 class="section-title">Чек-лист перед сделкой</h2>
                 
                 <div class="checklist">
                     <div class="checklist-item">Liquidations > 500K USDT?</div>
@@ -847,7 +1220,7 @@
             </section>
             
             <section id="examples" class="section">
-                <h2 class="section-title">📊 ПРИМЕРЫ РЕАЛЬНЫХ СДЕЛОК</h2>
+                <h2 class="section-title">Примеры реальных сделок</h2>
                 
                 <div class="example-box">
                     <h3 style="color: var(--secondary-color);">✅ Пример 1: Сильный SHORT сигнал</h3>
@@ -907,13 +1280,28 @@
         <!-- ENGLISH CONTENT -->
         <div class="lang-content" data-lang="en">
             <section id="intro-en" class="section">
-                <h2 class="section-title">🎯 Introduction</h2>
+                <h2 class="section-title">Start with a system</h2>
                 <p>This guide will teach you how to trade cryptocurrency futures. The system is suitable for beginners and based on simple, clear signals.</p>
             </section>
             
             <section id="parameters-en" class="section">
-                <h2 class="section-title">📱 PARAMETER MEANINGS</h2>
-                <img src="111.png" alt="Signal Example"><p><em>(January 27, 2026, 1:48 UTC)</em></p>
+                <h2 class="section-title">How to read signal metrics</h2>
+                <div class="signal-overview">
+                    <div class="signal-shot"><img src="111.png" alt="Signal Example"><p><em>January 27, 2026 · 1:48 UTC</em></p></div>
+                    <div class="signal-summary">
+                        <span class="signal-kicker">Incoming signal breakdown</span>
+                        <h3>Read the context first. Click second.</h3>
+                        <p>The bot combines direction, impulse strength, liquidity and market correlation on one screen. No metric should be judged in isolation.</p>
+                        <div class="signal-facts">
+                            <div class="signal-fact"><span>Direction</span><strong style="color:var(--red)">SHORT</strong></div>
+                            <div class="signal-fact good"><span>Liquidations</span><strong>962K</strong></div>
+                            <div class="signal-fact good"><span>DayVol</span><strong>313.9M</strong></div>
+                            <div class="signal-fact good"><span>NATR</span><strong>0.84%</strong></div>
+                            <div class="signal-fact"><span>Corr BTC</span><strong>0.84</strong></div>
+                            <div class="signal-fact good"><span>Funding</span><strong>0.0099%</strong></div>
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="parameter-box">
                     <h3>1. 1000PEPE SHORT 🔴</h3>
@@ -1019,13 +1407,14 @@
             </section>
             
             <section id="risk-en" class="section">
-                <h2 class="section-title">⚠️ RISK MANAGEMENT</h2>
+                <h2 class="section-title">Risk management</h2>
                 
                 <div class="danger-box">
-                    <h3>🚨 Golden Rules of Risk Management:</h3>
+                    <h3>Risk is defined before entry</h3>
+                    <p>Set the order amount, stop and target first — only then open the position.</p>
                 </div>
                 
-                <div class="step-box">
+                <div class="step-box" data-rule="01">
                     <h3>1. Position Size</h3>
                     <p>Never risk more than <span class="highlight">1-2% of deposit</span> per trade</p>
                     <div class="example-box">
@@ -1033,7 +1422,7 @@
                     </div>
                 </div>
                 
-                <div class="step-box">
+                <div class="step-box" data-rule="02">
                     <h3>2. Leverage</h3>
                     <ul>
                         <li>Beginners: <span class="badge badge-success">3x-5x</span> maximum</li>
@@ -1042,7 +1431,7 @@
                     </ul>
                 </div>
                 
-                <div class="step-box">
+                <div class="step-box" data-rule="03">
                     <h3>3. Risk/Reward Ratio</h3>
                     <p>Minimum <strong>1:2</strong></p>
                     <ul>
@@ -1054,10 +1443,22 @@
                 <div class="warning-box">
                     <strong>⚠️ ALWAYS use stop-loss!</strong> No exceptions!
                 </div>
+
+                <div class="risk-calculator" data-calculator="en">
+                    <div>
+                        <h3>Order size</h3>
+                        <p>Choose how much of the balance to allocate to one entry. For example, 2% of 1,000 USDT means a 20 USDT order.</p>
+                    </div>
+                    <div class="risk-controls">
+                        <label class="range-row"><span>Deposit</span><input class="deposit-range" type="range" min="100" max="10000" step="100" value="1000"><output class="deposit-output">1,000 USDT</output></label>
+                        <label class="range-row"><span>Per order</span><input class="risk-range" type="range" min="0.5" max="10" step="0.5" value="2"><output class="risk-output">2.0%</output></label>
+                        <div class="risk-result"><span>Order amount</span><strong class="risk-amount">20.00 USDT</strong></div>
+                    </div>
+                </div>
             </section>
 
             <section id="exits-en" class="section">
-                <h2 class="section-title">🎯 TAKE-PROFITS &amp; STOP-LOSSES</h2>
+                <h2 class="section-title">Take-profits &amp; stop-losses</h2>
 
                 <div class="warning-box">
                     <strong>💡 Core principle:</strong> Crypto is unpredictable. Once the position is in profit — <strong>protect your gains</strong>. Don't wait for the perfect exit.
@@ -1167,7 +1568,7 @@
             </section>
             
             <section id="checklist-en" class="section">
-                <h2 class="section-title">✅ CHECKLIST BEFORE TRADE</h2>
+                <h2 class="section-title">Checklist before trade</h2>
                 
                 <div class="checklist">
                     <div class="checklist-item">Liquidations > 500K USDT?</div>
@@ -1188,7 +1589,7 @@
             </section>
             
             <section id="examples-en" class="section">
-                <h2 class="section-title">📊 REAL TRADE EXAMPLES</h2>
+                <h2 class="section-title">Real trade examples</h2>
                 
                 <div class="example-box">
                     <h3 style="color: var(--secondary-color);">✅ Example 1: Strong SHORT Signal</h3>
@@ -1288,7 +1689,7 @@
             }
         });
         
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
@@ -1306,6 +1707,153 @@
                 backToTop.style.display = 'none';
             }
         });
+
+        backToTop.addEventListener('click', (event) => {
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Reading progress and active section state
+        const progressValue = document.getElementById('progressValue');
+        const progressText = document.getElementById('progressText');
+        const updateProgress = () => {
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0;
+            progressValue.style.width = `${progress}%`;
+            progressText.textContent = `${Math.round(progress)}%`;
+        };
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        updateProgress();
+
+        document.querySelectorAll('.container .lang-content').forEach(group => {
+            group.querySelectorAll(':scope > .section').forEach((section, index) => {
+                section.dataset.index = String(index + 1).padStart(2, '0');
+            });
+        });
+
+        const sectionObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                document.querySelectorAll('.nav a').forEach(link => link.classList.remove('active'));
+                const active = document.querySelector(`.nav a[href="#${entry.target.id}"]`);
+                if (active) active.classList.add('active');
+            });
+        }, { rootMargin: '-25% 0px -60% 0px' });
+        document.querySelectorAll('.section').forEach(section => sectionObserver.observe(section));
+
+        // Progressive disclosure for dense signal cards
+        document.querySelectorAll('.parameter-box').forEach((box, index) => {
+            box.classList.add('collapsible');
+            if (index % 7 === 0) box.classList.add('expanded');
+            const heading = box.querySelector(':scope > h3');
+            if (!heading) return;
+            heading.setAttribute('role', 'button');
+            heading.setAttribute('tabindex', '0');
+            const toggle = () => box.classList.toggle('expanded');
+            heading.addEventListener('click', toggle);
+            heading.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggle(); }
+            });
+        });
+
+        // Reveal animation
+        const revealObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: .08 });
+        document.querySelectorAll('.section, .terminal').forEach(element => {
+            element.classList.add('reveal');
+            revealObserver.observe(element);
+        });
+
+        // Interactive checklists
+        document.querySelectorAll('#checklist .checklist-item, #checklist-en .checklist-item').forEach(item => {
+            item.setAttribute('role', 'checkbox');
+            item.setAttribute('tabindex', '0');
+            item.setAttribute('aria-checked', 'false');
+            const toggle = () => {
+                item.classList.toggle('checked');
+                item.setAttribute('aria-checked', item.classList.contains('checked'));
+            };
+            item.addEventListener('click', toggle);
+            item.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggle(); }
+            });
+        });
+
+        // Risk calculator
+        document.querySelectorAll('.risk-calculator').forEach(calculator => {
+            const deposit = calculator.querySelector('.deposit-range');
+            const risk = calculator.querySelector('.risk-range');
+            const locale = calculator.dataset.calculator === 'ru' ? 'ru-RU' : 'en-US';
+            const update = () => {
+                const depositValue = Number(deposit.value);
+                const riskValue = Number(risk.value);
+                calculator.querySelector('.deposit-output').textContent = `${depositValue.toLocaleString(locale)} USDT`;
+                calculator.querySelector('.risk-output').textContent = `${riskValue.toFixed(1)}%`;
+                calculator.querySelector('.risk-amount').textContent = `${(depositValue * riskValue / 100).toFixed(2)} USDT`;
+            };
+            deposit.addEventListener('input', update);
+            risk.addEventListener('input', update);
+            update();
+        });
+
+        // Japanese candlesticks: liquidity sweep, SHORT entry, then bearish continuation
+        const candleData = [
+            [100,104,98,102],[102,106,100,105],[105,108,103,107],[107,110,105,106],
+            [106,112,105,111],[111,114,109,113],[113,116,111,114],[114,118,112,116],
+            [116,120,114,115],[115,117,110,111],[111,113,105,107],[107,109,101,103],
+            [103,106,98,100],[100,103,95,97],[97,99,91,93],[93,96,88,90],
+            [90,93,86,89],[89,92,84,85],[85,88,81,83],[83,86,79,82],
+            [82,85,80,84],[84,86,81,82],[82,84,79,80]
+        ];
+        const candlesGroup = document.getElementById('candles');
+        const svgNS = 'http://www.w3.org/2000/svg';
+        const priceToY = value => 300 - ((value - 78) / 44) * 250;
+        candleData.forEach(([open, high, low, close], index) => {
+            const group = document.createElementNS(svgNS, 'g');
+            const up = close >= open;
+            const x = 24 + index * 28;
+            const bodyTop = priceToY(Math.max(open, close));
+            const bodyBottom = priceToY(Math.min(open, close));
+            group.setAttribute('class', `candle ${up ? 'up' : 'down'}`);
+            group.style.animationDelay = `${.15 + index * .045}s`;
+            const wick = document.createElementNS(svgNS, 'line');
+            wick.setAttribute('x1', x); wick.setAttribute('x2', x);
+            wick.setAttribute('y1', priceToY(high)); wick.setAttribute('y2', priceToY(low));
+            const body = document.createElementNS(svgNS, 'rect');
+            body.setAttribute('x', x - 6); body.setAttribute('y', bodyTop);
+            body.setAttribute('width', 12); body.setAttribute('height', Math.max(3, bodyBottom - bodyTop));
+            body.setAttribute('rx', 1.5);
+            group.append(wick, body);
+            candlesGroup.append(group);
+        });
+
+        // Subtle demo feed motion
+        const livePrice = document.getElementById('livePrice');
+        let basePrice = 0.0050312;
+        window.setInterval(() => {
+            basePrice += (Math.random() - .54) * 0.0000010;
+            livePrice.textContent = Math.max(.0000001, basePrice).toFixed(7);
+        }, 1800);
+
+        // Desktop parallax for the terminal card
+        const terminalCard = document.querySelector('.terminal');
+        if (window.matchMedia('(pointer:fine)').matches) {
+            terminalCard.addEventListener('mousemove', event => {
+                const rect = terminalCard.getBoundingClientRect();
+                const rotateY = ((event.clientX - rect.left) / rect.width - .5) * 4;
+                const rotateX = -((event.clientY - rect.top) / rect.height - .5) * 3;
+                terminalCard.style.transform = `perspective(1200px) rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateY(-3px)`;
+            });
+            terminalCard.addEventListener('mouseleave', () => {
+                terminalCard.style.transform = 'perspective(1200px) rotateY(-2deg) rotateX(1deg)';
+            });
+        }
     </script>
 </body>
 </html>
